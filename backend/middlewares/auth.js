@@ -2,6 +2,7 @@ const auth = (req, res, next) => {
     console.log("Authenticating...");
     const userID = req.header('authorization'); //ide jön majd, hgy jwt.vel verifyoljuk
     res.locals.userID = userID;
+    if (!res.locals.userID) return res.send(401);
     next();
 };
 

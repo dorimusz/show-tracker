@@ -22,17 +22,18 @@ app.get('/api/public', (req, res) => {
     res.send('Hello world! - public');
 })
 
-app.get('/api/private', auth, (req, res) => {
+app.get('/api/private', auth(true), (req, res) => {
     console.log('private');
     res.send(`Hello world! - private ${res.locals.userID}`);
 })
 
-app.get('/api/prublic', auth, (req, res) => {
+app.get('/api/prublic', auth(false), (req, res) => {
+    console.log('pRublic');
     if (!res.locals.userID) return res.send("Hello world! - pRublic");
     res.send(`Hello world! - pRublic ${res.locals.userID}`);
 })
 
-app.use(errorHandler) //mivel 4 bemeneti paraméter van, tudni fogja, hogy ez error handler - de az err az első!!! és utolsóként regisztráljuk, app.get és route se legyen már utána
+app.use(errorHandler) //utolsóként regisztráljuk, app.get és route se legyen már utána
 
 app.listen(port, () => {
     console.log(`To do app is listening on port ${port}`)
