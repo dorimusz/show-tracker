@@ -13,12 +13,19 @@ app.use(cors({
 }));;
 app.use(express.json());
 
+//ezek mind lefutottak, minden hívásnál
 app.use(logger);
 app.use(auth);
 
-// app.get('/', (req, res) => {
-//     res.send('Hello World!')
-// })
+app.get('/api/logic1', (req, res) => {
+    console.log('logic1');
+    res.send('Hello world! - 1');
+})
+
+app.get('/api/logic2', (req, res) => {
+    console.log('logic2');
+    res.send('Hello world! - 2');
+})
 
 app.use(errorHandler) //mivel 4 bemeneti paraméter van, tudni fogja, hogy ez error handler - de az err az első!!! és utolsóként regisztráljuk, app.get és route se legyen már utána
 
