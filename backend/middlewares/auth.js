@@ -1,8 +1,9 @@
-const auth = (req, res, next) => {
+//ez egy olyan function, ami bizonyos paraméterekkel doglozoik és azon paraméterek alapján visszaad egy functiont - higher-order function
+const auth = (middlewareParams) => (req, res, next) => {
     console.log("Authenticating...");
     const userID = req.header('authorization'); //ide jön majd, hgy jwt.vel verifyoljuk
     res.locals.userID = userID;
-    if (!res.locals.userID) return res.send(401);
+    if (middlewareParams.block && !res.locals.userID) return res.sendStatus(401);
     next();
 };
 

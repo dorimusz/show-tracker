@@ -16,18 +16,19 @@ app.use(express.json());
 //ezek mind lefutottak, minden hívásnál
 app.use(logger);
 // app.use(auth); //de ezt nem akarom minden endpointál meghívni, ezért elehlyezhetem másként, a (req, res) elé
+// app.use(auth()); //így is használható
 
 app.get('/api/public', (req, res) => {
     console.log('public');
     res.send('Hello world! - public');
 })
 
-app.get('/api/private', auth(true), (req, res) => {
+app.get('/api/private', auth({ block: true }), (req, res) => {
     console.log('private');
     res.send(`Hello world! - private ${res.locals.userID}`);
 })
 
-app.get('/api/prublic', auth(false), (req, res) => {
+app.get('/api/prublic', auth({ block: false }), (req, res) => {
     console.log('pRublic');
     if (!res.locals.userID) return res.send("Hello world! - pRublic");
     res.send(`Hello world! - pRublic ${res.locals.userID}`);
