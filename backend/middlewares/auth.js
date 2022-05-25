@@ -1,11 +1,21 @@
 //ez egy olyan function, ami bizonyos paraméterekkel doglozoik és azon paraméterek alapján visszaad egy functiont - higher-order function
-const auth = (middlewareParams) => (req, res, next) => {
+const auth = ({ block }) => (req, res, next) => {
+    console.log("Authenticating...");
+    const userID = req.header('authorization'); //ide jön majd, hgy jwt.vel verifyoljuk
+    res.locals.userID = userID;
+    if (block && !res.locals.userID) return res.sendStatus(401);
+    next();
+};
+
+/*
+const auth = ({middlewareParams}) => (req, res, next) => {
     console.log("Authenticating...");
     const userID = req.header('authorization'); //ide jön majd, hgy jwt.vel verifyoljuk
     res.locals.userID = userID;
     if (middlewareParams.block && !res.locals.userID) return res.sendStatus(401);
     next();
 };
+*/
 
 module.exports = auth;
 
