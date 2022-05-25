@@ -8,7 +8,7 @@ const errorHandler = require('./middlewares/errorHandler')
 const auth = require('./middlewares/auth')
 
 app.use(cors({
-    origin: process.env.HOST,
+    origin: process.env.HOST, //a frontend localhostja
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }));;
 app.use(express.json()); //bodyban érkező json parseolásáért felel
