@@ -13,8 +13,8 @@ app.use(cors({
 }));;
 app.use(express.json()); //bodyban érkező json parseolásáért felel
 app.use(logger); //minden hívásnál automatikusan lefut ez a middleware
-// app.use(auth); //de ezt nem akarom minden endpointál meghívni, ezért elehlyezhetem másként, a (req, res) elé
-// app.use(auth()); //így is használható
+// app.use(auth); //de ezt nem akarom minden endpoint hívásnál meghívni, ezért elehlyezhetem másként, a (req, res) elé
+// app.use(auth()); //így is használható amúgy te csicskagyász
 
 app.get('/api/public', (req, res) => {
     console.log('public');
