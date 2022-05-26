@@ -1,3 +1,4 @@
+// console.log('app.js line 1 is running');
 const cors = require('cors');
 const express = require('express');
 const app = express();
@@ -27,6 +28,7 @@ app.get('/api/public', (req, res) => {
 })
 
 app.get('/api/private', auth({ block: true }), (req, res) => {
+    // console.log('app.js line 31 is running')
     console.log('private');
     res.send(`Hello world! - private ${res.locals.userID}`);
 })
