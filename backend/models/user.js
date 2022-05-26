@@ -21,5 +21,5 @@ const userSchema = new mongoose.Schema({
     dashboards: [dashboardSchema], //empty list as default
 });
 
-const userModel = mongoose.model("user", userSchema);
-module.exports = userModel;
+const User = mongoose.model("user", userSchema);
+module.exports = User;
