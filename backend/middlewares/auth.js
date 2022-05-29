@@ -3,7 +3,7 @@ const auth = ({ block }) => (req, res, next) => {
     console.log("Authenticating...");
     const userId = req.header('authorization'); //ide jön majd, hgy jwt.vel verifyoljuk
     res.locals.userId = userId;
-    console.log(userId)
+    console.log(`Authernticated user's _id: ${userId}`)
     if (block && !res.locals.userId) return res.sendStatus(401);
     next();
 };

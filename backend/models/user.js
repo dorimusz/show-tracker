@@ -9,7 +9,7 @@ const todoSchema = new mongoose.Schema({
 
 const dashboardSchema = new mongoose.Schema({
     title: { type: String, required: true },
-    todos: [todoSchema],
+    todos: [{ todoSchema }],
 });
 
 //uses the subdocuments
