@@ -7,9 +7,6 @@ const { logger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler')
 const auth = require('./middlewares/auth')
 
-// const userRoutes = require('./routes/user');
-const dashboardRoutes = require('./routes/dashboard');
-
 app.use(cors({
     origin: process.env.HOST, //a frontend localhostja
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -19,14 +16,18 @@ app.use(logger); //minden hívásnál automatikusan lefut ez a middleware
 // app.use(auth); //de ezt nem akarom minden endpoint hívásnál meghívni, ezért elehlyezhetem másként, a (req, res) elé
 // app.use(auth()); //így is használható amúgy te csicskagyász
 
-// app.use('/api', userRoutes)
+//routes:
+const dashboardRoutes = require('./routes/dashboard');
 app.use('/api/dashboards', dashboardRoutes)
+const userRoutes = require('./routes/user');
+app.use('/api/user', userRoutes)
 
 app.get('/api/public', (req, res) => {
     console.log('public');
     res.send('Hello world! - public');
 })
 
+//some endpoints:
 app.get('/api/private', auth({ block: true }), (req, res) => {
     // console.log('app.js line 31 is running')
     console.log('private');
