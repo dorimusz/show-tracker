@@ -1,6 +1,6 @@
 //ez egy olyan function, ami bizonyos paraméterekkel doglozoik és azon paraméterek alapján visszaad egy functiont - higher-order function
 const auth = ({ block }) => (req, res, next) => {
-    console.log("Authenticating...");
+    // console.log("Authenticating...");
     const userId = req.header('authorization'); //ide jön majd, hgy jwt.vel verifyoljuk
     res.locals.userId = userId;
     console.log(`Authernticated user's _id: ${userId}`)

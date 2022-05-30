@@ -8,9 +8,14 @@ router.get('/', auth({ block: true }), async (req, res) => {
     // 1. needs auth middleware with block
     // 2. find user with userID from res.locals.Id
     // 3. return user.dashboards; send all dashboards connected to a user from mongoDB
+
+    /*
     const parsedId = JSON.parse(res.locals.userId)
     const user = await User.findById({ '_id': ObjectId(parsedId) });
     res.json({ user }); // => {user: user}
+    */
+    const user = await User.findById(res.locals.userId);
+    res.json({ user });
 });
 
 /* no need for these right now
