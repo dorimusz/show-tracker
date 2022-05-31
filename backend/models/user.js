@@ -14,8 +14,12 @@ const dashboardSchema = new mongoose.Schema({
 
 //uses the subdocuments
 const userSchema = new mongoose.Schema({
-    username: { type: String, unique: true, required: true }, //empty string is not accepted + !!!UNIQUE
-    googleID: { type: String, unique: true, required: true }, //google auth miatt + !!!UNIQUE
+    username: { type: String, unique: true }, //empty string is not accepted + !!!UNIQUE
+    // googleID: { type: String, unique: true, required: true }, //google auth miatt + !!!UNIQUE
+    providers: {
+        google: { type: String, unique: true },
+        facebook: { type: String, unique: true }
+    },
     // email: { type: String, unique: true, required: true }, //empty string is not accepted + validation + !!!UNIQUE
     // password: { type: String, required: true }, //empty string is not accepted + validation
     dashboards: [dashboardSchema], //empty list as default
