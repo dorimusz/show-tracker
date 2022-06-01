@@ -6,10 +6,10 @@ const User = require('../models/user');
 
 const config = {
     google: {
-        client_id: "",
-        client_secret: "",
-        redirect_uri: "",
-        token_endpoint: "",
+        client_id: "423125049963-vnhlm59vvirdjsquu0efhqvq5u91orks.apps.googleusercontent.com",
+        client_secret: "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",
+        redirect_uri: "http://localhost:3000/callback",
+        token_endpoint: "https://oauth2.googleapis.com/token",
         grant_type: "authorization_code",
         scope: ""
     },
@@ -18,7 +18,7 @@ const config = {
         client_secret: "", //appsecret ?
         redirect_uri: "",
         token_endpoint: "",
-        grant_type: "authorization_code"
+        // grant_type: "authorization_code"
     }
 }
 
@@ -35,16 +35,17 @@ router.post('/login', async (req, res) => {
     if (!Object.keys(config).includes(provider)) return res.sendStatus(400) //dummy stuff sent
 
     //be van csomizva a utils/http-be
-    const response = http.post(config[provider].token_endpoint, {
+    const response = await http.post(config[provider].token_endpoint, {
         "code": code,
         "client_id": config[provider].client_id,
         "client_secret": config[provider].client_secret,
         "redirect_uri": config[provider].redirect_uri,
-        "grant_type": "authorization_code"
+        "scope": "openid"
+        // "grant_type": "authorization_code"
     })
 
     if (!response) return res.sendStatus(500);
-    if (response.status !== 200) return res.sendStatus(401);
+    if (response.status !== 200) return res.sendStatus(401); //amit a google ad, nem 200-as, akkor nem tudjuk azonosítani
 
     //azért nem verifyoljuk, mert mi nem tudjuk. a google írta alá, nála van a secrer-key, de nyugodtan decodeolhatjuk
     const decoded = jwt.decode(response.data.id_token)
@@ -58,7 +59,7 @@ router.post('/login', async (req, res) => {
     const user = await User.findOneAndUpdate(
         { [key]: decoded.sub },
         { "providers": { [provider]: decoded.sub } },
-        { upsert: true }
+        { upsert: true, new: true }
     );
 
     const sessionToken = jwt.sign({ "userId": user._id, "providers": user.providers }, process.env.JWT_SECRET, { expiresIn: "1h" }); //ezt az id-t a mongoDB adta nekik, sevret key, expires in
