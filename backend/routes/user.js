@@ -6,8 +6,8 @@ const User = require('../models/user');
 
 const config = {
     google: {
-        client_id: "423125049963-vnhlm59vvirdjsquu0efhqvq5u91orks.apps.googleusercontent.com",
-        client_secret: "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",
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
         redirect_uri: "http://localhost:3000/callback",
         token_endpoint: "https://oauth2.googleapis.com/token",
         grant_type: "authorization_code",
