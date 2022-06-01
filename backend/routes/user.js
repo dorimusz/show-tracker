@@ -52,11 +52,26 @@ router.post('/login', async (req, res) => {
 
     // elmentjük a usert a googleId alapján
     const userId = decoded.sub //ezen belül van az openid
-    const user = await User.find({ [`providers.${provider}`]: userId })
+    const key = `providers.${provider}`;    // const key = 'providers' + provider;
+    // const user = await User.find({ [`providers.${provider}`]: userId })
+    // const user = await User.find({[key]: decoded.sub})
+    const user = await User.findOneAndUpdate(
+        { [key]: decoded.sub },
+        { "providers": { [provider]: decoded.sub } },
+        { upsert: true }
+    );
+
+    const sessionToken = jwt.sign({ "userId": user._id, "providers": user.providers }, process.env.JWT_SECRET, { expiresIn: "1h" }); //ezt az id-t a mongoDB adta nekik, sevret key, expires in
+
+    res.json(sessionToken) //visszaküldjük neki stringként, de küldhetjük objectben is {sessionToken}/{"sessionToken": sessionToken}
     /*
-    const key = 'providers' + provider;
-    const user = await User.find({[key]: decoded.sub})
+    if (!user){
+        User.create({
+            "providers": {[provider]: decoded.sub} //létrehozunk egy usert, akinek lesz egy üres dashboard listája
+        });
+    }
     */
+
 });
 
 router.post('/logout', async (req, res) => {
