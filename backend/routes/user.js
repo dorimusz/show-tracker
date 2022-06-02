@@ -40,8 +40,8 @@ router.post('/login', async (req, res) => {
         "client_id": config[provider].client_id,
         "client_secret": config[provider].client_secret,
         "redirect_uri": config[provider].redirect_uri,
-        "scope": "openid"
-        // "grant_type": "authorization_code"
+        // "scope": "openid"
+        "grant_type": "authorization_code"
     })
 
     if (!response) return res.sendStatus(500);

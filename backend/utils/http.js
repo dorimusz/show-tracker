@@ -6,11 +6,12 @@ const http = (baseurl) => {
         timeout: 3000, //szállj ki, 
     });
 
-    const post = (url, body) => {
+    const post = async (url, body) => {
         try {
-            const response = instance.post(url, body) //ez z axios instanceait hozza magával
+            const response = await instance.post(url, body) //ez z axios instanceit hozza magával
             return response
         } catch (error) {
+            console.log(error.response)
             return error.response
         }
     }
