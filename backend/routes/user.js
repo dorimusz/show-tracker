@@ -64,7 +64,7 @@ router.post('/login', async (req, res) => {
 
     const sessionToken = jwt.sign({ "userId": user._id, "providers": user.providers }, process.env.JWT_SECRET, { expiresIn: "1h" }); //ezt az id-t a mongoDB adta nekik, sevret key, expires in
 
-    res.json(sessionToken) //visszaküldjük neki stringként, de küldhetjük objectben is {sessionToken}/{"sessionToken": sessionToken}
+    res.json({ sessionToken }) //visszaküldjük neki stringként(sessionToken), de küldhetjük objectben is ({sessionToken})/{"sessionToken": sessionToken}
     /*
     if (!user){
         User.create({
