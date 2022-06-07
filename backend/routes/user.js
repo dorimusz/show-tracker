@@ -1,3 +1,4 @@
+require("dotenv").config();
 const router = require('express').Router();
 const httpModule = require('../utils/http');
 const http = httpModule(); //ide jön a baseurl, mint pl a tokenendpoint legeleje
@@ -6,19 +7,29 @@ const User = require('../models/user');
 
 const config = {
     google: {
-        client_id: process.env.CLIENT_ID,
-        client_secret: process.env.CLIENT_SECRET,
+        client_id: process.env.CLIENT_ID_GOOGLE,
+        client_secret: process.env.CLIENT_SECRET_GOOGLE,
         redirect_uri: "http://localhost:3000/callback",
         token_endpoint: "https://oauth2.googleapis.com/token",
         grant_type: "authorization_code",
         scope: ""
+    },
+    github: {
+        client_id: process.env.CLIENT_ID_GITHUB,
+        client_secret: process.env.CLIENT_SECRET_GITHUB,
+        redirect_uri: "http://localhost:3000/callback/github",
+        token_endpoint: "https://github.com/login/oauth/access_token",
+        grant_type: "authorization_code",
+        // scope: "",
+        user_endpoint: 'https://api.github.com/user'
     },
     facebook: {
         client_id: "",  //appid ?
         client_secret: "", //appsecret ?
         redirect_uri: "",
         token_endpoint: "",
-        // grant_type: "authorization_code"
+        // scope: "user",
+        grant_type: "authorization_code"
     }
 }
 
@@ -40,25 +51,58 @@ router.post('/login', async (req, res) => {
         "client_id": config[provider].client_id,
         "client_secret": config[provider].client_secret,
         "redirect_uri": config[provider].redirect_uri,
+        "grant_type": config[provider].grant_type,
         // "scope": "openid"
-        "grant_type": "authorization_code"
+    }, {
+        headers: {
+            Accept: "application/json"
+        }
     })
 
     if (!response) return res.sendStatus(500);
     if (response.status !== 200) return res.sendStatus(401); //amit a google ad, nem 200-as, akkor nem tudjuk azonosítani
 
-    //azért nem verifyoljuk, mert mi nem tudjuk. a google írta alá, nála van a secrer-key, de nyugodtan decodeolhatjuk
-    const decoded = jwt.decode(response.data.id_token)
-    if (!decoded) return res.sendStatus(500);
+    //github oauth flowjahoz
+    let openId;
+    const onlyOauth = !response.data.id_token;
+
+    if (onlyOauth) {
+        // let token = response.data.split("=")[1].split("&")[0];
+        let token = response.data.access_token;
+        console.log(token);
+
+        const userResponse = await http.get(config[provider].user_endpoint, {
+            headers: {
+                authorization: `Bearer ${token}`
+                // authorization: `Bearer ${response.data.access_token}`
+                // authorization: "Bearer " + response.data.access_token`
+            }
+        })
+        if (!response) return res.sendStatus(500);
+        if (response.status !== 200) return res.sendStatus(401);
+        openId = userResponse.data.id;
+    } else {
+        //azért nem verifyoljuk, mert mi nem tudjuk. a google írta alá, nála van a secrer-key, de nyugodtan decodeolhatjuk
+        const decoded = jwt.decode(response.data.id_token)
+        if (!decoded) return res.sendStatus(500);
+        openId = decoded.sub;
+    }
 
     // elmentjük a usert a googleId alapján
-    const userId = decoded.sub //ezen belül van az openid
+    // const userId = decoded.sub //ezen belül van az openid
     const key = `providers.${provider}`;    // const key = 'providers' + provider;
     // const user = await User.find({ [`providers.${provider}`]: userId })
     // const user = await User.find({[key]: decoded.sub})
+    /* //googlenél volt, azóta refaktorlátuk
     const user = await User.findOneAndUpdate(
         { [key]: decoded.sub },
         { "providers": { [provider]: decoded.sub } },
+        { upsert: true, new: true }
+    );
+    */
+    const user = await User.findOneAndUpdate(
+        { [key]: openId },
+        { "providers": { [provider]: openId } },
         { upsert: true, new: true }
     );
 

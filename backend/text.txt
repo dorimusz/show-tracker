@@ -1,0 +1,4 @@
+https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=423125049963-vnhlm59vvirdjsquu0efhqvq5u91orks.apps.googleusercontent.com&response_type=code&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&flowName=GeneralOAuthFlow
+
+
+https://github.com/login/oauth/authorize?client_id=c9f03e1cc7e180dccd46&response_type=code&scope=user&redirect_uri=http://localhost:3000/callback/github&prompt=select_account
