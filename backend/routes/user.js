@@ -72,24 +72,13 @@ router.post('/login', async (req, res) => {
         openId = userResponse.data[id];
         // openId = userResponse.data.id;
     } else {
-        //azért nem verifyoljuk, mert mi nem tudjuk. a google írta alá, nála van a secrer-key, de nyugodtan decodeolhatjuk
         const decoded = jwt.decode(response.data.id_token)
         if (!decoded) return res.sendStatus(500);
         openId = decoded.sub;
     }
 
-    // elmentjük a usert a googleId alapján
-    // const userId = decoded.sub //ezen belül van az openid
-    const key = `providers.${provider}`;    // const key = 'providers' + provider;
-    // const user = await User.find({ [`providers.${provider}`]: userId })
-    // const user = await User.find({[key]: decoded.sub})
-    /* //googlenél volt, azóta refaktorlátuk
-    const user = await User.findOneAndUpdate(
-        { [key]: decoded.sub },
-        { "providers": { [provider]: decoded.sub } },
-        { upsert: true, new: true }
-    );
-    */
+    // elmentjük a usert a googleId alapján, 
+    const key = `providers.${provider}`;
     let user = await User.findOneAndUpdate(
         { [key]: openId },
         { "providers": { [provider]: openId } },
@@ -99,14 +88,6 @@ router.post('/login', async (req, res) => {
     const sessionToken = jwt.sign({ "userId": user._id, "providers": user.providers }, process.env.JWT_SECRET, { expiresIn: "1h" }); //ezt az id-t a mongoDB adta nekik, sevret key, expires in
 
     res.json({ sessionToken }) //visszaküldjük neki stringként(sessionToken), de küldhetjük objectben is ({sessionToken})/{"sessionToken": sessionToken}
-    /*
-    if (!user){
-        User.create({
-            "providers": {[provider]: decoded.sub} //létrehozunk egy usert, akinek lesz egy üres dashboard listája
-        });
-    }
-    */
-
 });
 
 // router.post('/logout', async (req, res) => {
