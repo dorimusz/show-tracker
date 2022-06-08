@@ -10,10 +10,10 @@ const http = (baseurl) => {
     const post = async (...params) => {
         try {
             const response = await instance.post(...params) //ez z axios instanceit hozza magával
-            console.log("RESPONSE DATA:", response.data);
+            console.log("BODY: ", response.data);
             return response
         } catch (error) {
-            // console.log('(post) error resp: ' + error.response);
+            console.log('(post) error resp: ' + error.response);
             console.log('(post) error status: ' + error.response.status);
             console.log('(post) error  data: ' + error.response.data);
             return error.response

@@ -14,6 +14,7 @@ const config = {
         grant_type: "authorization_code",
         user_endpoint: null,
         user_id: null,
+        scope: ""
     },
     github: {
         client_id: process.env.CLIENT_ID_GITHUB,
@@ -21,12 +22,24 @@ const config = {
         redirect_uri: "http://localhost:3000/callback/github",
         token_endpoint: "https://github.com/login/oauth/access_token",
         grant_type: "authorization_code",
+        // scope: "",
         user_endpoint: 'https://api.github.com/user',
         user_id: "id",
     },
+    facebook: {
+        client_id: "",  //appid ?
+        client_secret: "", //appsecret ?
+        redirect_uri: "",
+        token_endpoint: "",
+        // scope: "user",
+        grant_type: "authorization_code"
+    }
 }
 
 router.post('/login', async (req, res) => {
+    // receiving google code -> get google token -> get googleID
+    // userID exists ? send jwt token : create user in DB and send jwt token
+
     const payload = req.body;
     if (!payload) return res.sendStatus(400);
 
@@ -42,6 +55,7 @@ router.post('/login', async (req, res) => {
         "client_secret": config[provider].client_secret,
         "redirect_uri": config[provider].redirect_uri,
         "grant_type": config[provider].grant_type,
+        // "scope": "openid"
     }, {
         headers: {
             Accept: "application/json"
@@ -57,18 +71,20 @@ router.post('/login', async (req, res) => {
 
     if (onlyOauth) {
         // let token = response.data.split("=")[1].split("&")[0];
-        let accesstoken = response.data.access_token;
-        console.log(accesstoken);
+        let token = response.data.access_token;
+        console.log(token);
 
         const userResponse = await http.get(config[provider].user_endpoint, {
             headers: {
-                authorization: "Bearer " + accesstoken,
+                authorization: `Bearer ${token}`
+                // authorization: `Bearer ${response.data.access_token}`
+                // authorization: "Bearer " + response.data.access_token`
             }
         })
         if (!response) return res.sendStatus(500);
         if (response.status !== 200) return res.sendStatus(401);
 
-        const id = config[provider].user_id;
+        const id = config[provider].user_id
         openId = userResponse.data[id];
         // openId = userResponse.data.id;
     } else {
