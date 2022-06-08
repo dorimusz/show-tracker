@@ -1,9 +1,12 @@
-const app = require('../app')
+
+require('dotenv').config();
+const app = require('../app');
 const mockserver = require('supertest');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const User = require('../models/user')
-const { startDB, stopDB, deleteAll } = require('./util/inMemoryDB')
+const User = require('../models/user');
+const { startDB, stopDB, deleteAll } = require('./util/inMemoryDB');
+const jwt = require("jsonwebtoken");;
 
 describe('/api/dashboards get tests', () => {
     //ide kerül sok-sok teszteset
@@ -32,7 +35,8 @@ describe('/api/dashboards get tests', () => {
         //given
         const newUser = new User({ username: 'Fuego', googleID: '123456' });
         await newUser.save();
-        client.set('authorization', newUser._id);
+        const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET)
+        client.set('authorization', token);
 
         // when
         const response = await client.get('/api/dashboards');
@@ -46,7 +50,8 @@ describe('/api/dashboards get tests', () => {
     test('deleted user receives nothing/null', async () => {
         const newUser = new User({ username: 'Fuego', googleID: '123456' });
         await newUser.save();
-        client.set('authorization', newUser._id);
+        const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET)
+        client.set('authorization', token);
         await User.deleteMany();
 
         // when

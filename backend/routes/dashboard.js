@@ -14,7 +14,7 @@ router.get('/', auth({ block: true }), async (req, res) => {
     const user = await User.findById({ '_id': ObjectId(parsedId) });
     res.json({ user }); // => {user: user}
     */
-    const user = await User.findById(res.locals.userId);
+    const user = await User.findById(res.locals.user.userId);
     res.json({ user });
 });
 
@@ -34,7 +34,7 @@ router.get('/:id/todos/:todoId', auth({ block: true }), async (req, res) => {
 
 router.post('/', auth({ block: true }), async (req, res) => {
     // create dashboard for user, send created :id
-    const parsedId = JSON.parse(res.locals.userId)
+    const parsedId = JSON.parse(res.locals.user.userId)
     const user = await User.findById({ '_id': ObjectId(parsedId) });
 
     user.dashboards.push({ title: req.body.title });   //MIÉRT NULL EZ A CSICSKAGYÁSZ és mit csináljak vele anyád user.dashboard

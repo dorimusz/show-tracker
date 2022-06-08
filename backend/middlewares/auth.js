@@ -1,17 +1,16 @@
 const jwt = require('jsonwebtoken')
 
-//ez egy olyan function, ami bizonyos paraméterekkel doglozoik és azon paraméterek alapján visszaad egy functiont - higher-order function
 const auth = ({ block }) => (req, res, next) => {
     // console.log("Authenticating...");
+
     const token = req.header('authorization'); //ide jön majd, hgy jwt.vel verifyoljuk
-    const user = jwt.verify(token, process.env.JWT_SECRET); //itt történik a verifyolás
-
-
-    res.locals.userId = userId;
-    console.log(`Authernticated user's _id: ${userId}`)
-    if (block && !res.locals.userId) return res.sendStatus(401);
-    next();
-};
+    jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
+        if (error && block) return res.sendStatus(401);
+        res.locals.user = user;
+        // console.log(`Authenticated user's _id: ${userId}`)
+        next();
+    });
+}; //ez egy olyan function, ami bizonyos paraméterekkel doglozik és azon paraméterek alapján visszaad egy functiont - higher-order function
 
 module.exports = auth;
 
