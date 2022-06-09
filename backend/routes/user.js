@@ -4,6 +4,7 @@ const httpModule = require('../utils/http');
 const http = httpModule(); //ide jön a baseurl, mint pl a tokenendpoint legeleje
 const jwt = require('jsonwebtoken')
 const User = require('../models/user');
+const auth = require('../middlewares/auth')
 
 const config = {
     google: {
@@ -26,7 +27,7 @@ const config = {
     },
 }
 
-router.post('/login', async (req, res) => {
+router.post('/login', auth({ block: false }), async (req, res) => {
     const payload = req.body;
     if (!payload) return res.sendStatus(400);
 
@@ -77,21 +78,53 @@ router.post('/login', async (req, res) => {
         openId = decoded.sub;
     }
 
-    // elmentjük a usert a googleId alapján, 
+    // elmentjük a usert a googleId/openid alapján, 
     const key = `providers.${provider}`;
+    let user = await User.findOne(
+        { [key]: openId },
+    );
+
+    if (user && res.locals.user?.providers) {
+        user.providers = { ...user.providers, ...res.locals.user.providers };
+
+        user = await user.save();
+    }
+
+    /*
+    //account merge előtt
     let user = await User.findOneAndUpdate(
         { [key]: openId },
         { "providers": { [provider]: openId } },
         { upsert: true, new: true }
     );
+    */
+    /*
+    const user = {username: "random", profile: {
+        id: "randomstring",
+        account: {
+            balance: "..",
+            id: ".."
+        }
+    }}
+    const b1 = (user && user.profile && user.profile.account) ? user.profile.account.balance : null //a b1 értéke balance vagy semmi
+    const b1 = user?.profile?.account?.balance
+    */
 
-    const sessionToken = jwt.sign({ "userId": user._id, "providers": user.providers }, process.env.JWT_SECRET, { expiresIn: "1h" }); //ezt az id-t a mongoDB adta nekik, sevret key, expires in
+    //optional chaining user?. = user ? user._id : null
+    const sessionToken = jwt.sign({ "userId": user?._id, "providers": user ? user.providers : { [provider]: openId } }, process.env.JWT_SECRET, { expiresIn: "1h" }); //ezt az id-t a mongoDB adta nekik, secret key, expires in
 
     res.json({ sessionToken }) //visszaküldjük neki stringként(sessionToken), de küldhetjük objectben is ({sessionToken})/{"sessionToken": sessionToken}
 });
 
-// router.post('/logout', async (req, res) => {
+//user létrehozása
+router.post('/create', auth({ block: true }), async (req, res) => {
+    // res.locals.user elérhető itt
+    if (!req.body?.username) return res.sendStatus(400);
+    const user = await User.create({ username: req.body.username, providers: res.locals.user.providers });
 
-// })
+    const sessionToken = jwt.sign({ "userId": user._id, "providers": user.providers }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    res.json({ sessionToken });
+});
+
 
 module.exports = router;
