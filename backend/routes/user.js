@@ -27,6 +27,7 @@ const config = {
     },
 }
 
+//ha nincs headerje, akkor is be tud jelentkezni
 router.post('/login', auth({ block: false }), async (req, res) => {
     const payload = req.body;
     if (!payload) return res.sendStatus(400);
