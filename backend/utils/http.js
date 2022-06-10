@@ -1,8 +1,8 @@
 const { default: axios } = require("axios")
 
-const http = (baseurl) => {
+const http = () => {
     const instance = axios.create({
-        baseURL: baseurl || '', //'https://some-domain.com/api/'
+        baseURL: '', //'https://some-domain.com/api/'
         timeout: 3000, //szállj ki, 
     });
 
@@ -30,7 +30,8 @@ const http = (baseurl) => {
             return error.response;
         }
     }
-    return { post, get }
+    return { post, get, _instance: instance }
+    //privátként exportáljuk az instancet, így jelöljük
 }
 
-module.exports = http;
+module.exports = http();

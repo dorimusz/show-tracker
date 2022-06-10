@@ -1,7 +1,6 @@
 // require("dotenv").config();
 const router = require('express').Router();
-const httpModule = require('../utils/http');
-const http = httpModule(); //ide jön a baseurl, mint pl a tokenendpoint legeleje
+const http = require('../utils/http'); //ide jön a baseurl, mint pl a tokenendpoint legeleje
 const jwt = require('jsonwebtoken')
 const User = require('../models/user');
 const auth = require('../middlewares/auth')
