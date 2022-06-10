@@ -1,31 +1,11 @@
-require("dotenv").config();
+// require("dotenv").config();
 const router = require('express').Router();
 const httpModule = require('../utils/http');
 const http = httpModule(); //ide jön a baseurl, mint pl a tokenendpoint legeleje
 const jwt = require('jsonwebtoken')
 const User = require('../models/user');
 const auth = require('../middlewares/auth')
-
-const config = {
-    google: {
-        client_id: process.env.CLIENT_ID_GOOGLE,
-        client_secret: process.env.CLIENT_SECRET_GOOGLE,
-        redirect_uri: "http://localhost:3000/callback",
-        token_endpoint: "https://oauth2.googleapis.com/token",
-        grant_type: "authorization_code",
-        user_endpoint: null,
-        user_id: null,
-    },
-    github: {
-        client_id: process.env.CLIENT_ID_GITHUB,
-        client_secret: process.env.CLIENT_SECRET_GITHUB,
-        redirect_uri: "http://localhost:3000/callback/github",
-        token_endpoint: "https://github.com/login/oauth/access_token",
-        grant_type: "authorization_code",
-        user_endpoint: 'https://api.github.com/user',
-        user_id: "id",
-    },
-}
+const config = require('../app.config')
 
 //ha nincs headerje, akkor is be tud jelentkezni
 router.post('/login', auth({ block: false }), async (req, res) => {
@@ -35,15 +15,15 @@ router.post('/login', auth({ block: false }), async (req, res) => {
     const code = payload.code;
     const provider = payload.provider;
     if (!code || !provider) return res.sendStatus(400) //not enough data
-    if (!Object.keys(config).includes(provider)) return res.sendStatus(400) //dummy stuff sent
+    if (!Object.keys(config.auth).includes(provider)) return res.sendStatus(400) //dummy stuff sent
 
     //be van csomizva a utils/http-be
-    const response = await http.post(config[provider].token_endpoint, {
+    const response = await http.post(config.auth[provider].token_endpoint, {
         "code": code,
-        "client_id": config[provider].client_id,
-        "client_secret": config[provider].client_secret,
-        "redirect_uri": config[provider].redirect_uri,
-        "grant_type": config[provider].grant_type,
+        "client_id": config.auth[provider].client_id,
+        "client_secret": config.auth[provider].client_secret,
+        "redirect_uri": config.auth[provider].redirect_uri,
+        "grant_type": config.auth[provider].grant_type,
     }, {
         headers: {
             Accept: "application/json"
@@ -62,7 +42,7 @@ router.post('/login', auth({ block: false }), async (req, res) => {
         let accesstoken = response.data.access_token;
         console.log(accesstoken);
 
-        const userResponse = await http.get(config[provider].user_endpoint, {
+        const userResponse = await http.get(config.auth[provider].user_endpoint, {
             headers: {
                 authorization: "Bearer " + accesstoken,
             }
@@ -70,7 +50,7 @@ router.post('/login', auth({ block: false }), async (req, res) => {
         if (!response) return res.sendStatus(500);
         if (response.status !== 200) return res.sendStatus(401);
 
-        const id = config[provider].user_id;
+        const id = config.auth[provider].user_id;
         openId = userResponse.data[id];
         // openId = userResponse.data.id;
     } else {
