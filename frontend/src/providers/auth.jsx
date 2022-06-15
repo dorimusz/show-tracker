@@ -1,4 +1,5 @@
 import React, { useContext, createContext, useState } from "react";
+import http from 'axios'
 //milyen értéket és metodokat cipelnénk körbe az alkalmazáson - mi fog ide ide kerülni? token
 
 const AuthContext = createContext();
@@ -21,11 +22,24 @@ const AuthProvider = ({ children }) => {
         window.open(fullUrl)
     };
 
+    const login = async (code, provider) => {
+        try {
+            const response = await http.post('http://localhost:4000/api/user/login', {
+                "code": code,
+                "provider": provider
+            });
+            setToken(response.data.sessionToken) //amit a backend ad nékünk vissza
+
+        } catch (error) {
+            setToken(null)
+        }
+    };
+
     const logout = () => {
         setToken(null)
     };
 
-    const contextValue = { token, auth, logout };
+    const contextValue = { token, auth, logout, login };
 
     return (
         <>
@@ -37,8 +51,15 @@ const AuthProvider = ({ children }) => {
     );
 };
 
+//custom hook
 const useAuth = () => {
-    return useContext(AuthContext);
-};
+    const context = useContext(AuthContext);
+    if (!context) throw new Error("add AuthProvider to root");
+    return context
+}
+
+// const useAuth = () => {
+//     return useContext(AuthContext);
+// };
 
 export { AuthProvider, useAuth };
