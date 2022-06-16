@@ -1,11 +1,20 @@
 import React, { useContext, createContext, useState } from "react";
 import http from 'axios'
+import { useEffect } from "react";
 //milyen értéket és metodokat cipelnénk körbe az alkalmazáson - mi fog ide ide kerülni? token
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setToken(token)
+        }
+    }, [])
+
 
     //megszerezzük a tokent, hogy autentikálhassunk. az, hogy hogyan állítjuk be, itt nem érdekes??
     const auth = () => {
@@ -28,10 +37,14 @@ const AuthProvider = ({ children }) => {
                 "code": code,
                 "provider": provider
             });
-            setToken(response.data.sessionToken) //amit a backend ad nékünk vissza
+            console.log("data", response.data);
+            setToken(response.data.sessionToken); //amit a backend ad nékünk vissza
+            localStorage.setItem("token", response.data.sessionToken);
 
         } catch (error) {
-            setToken(null)
+            console.log(error);
+            setToken(null);
+            localStorage.removeItem("token");
         }
     };
 

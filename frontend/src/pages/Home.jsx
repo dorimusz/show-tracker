@@ -1,7 +1,7 @@
 import React from "react";
 import { useCounter } from "../hooks/useCounter";
 import { useCounter as useGlobalCounter } from "../providers/counter";
-import { useAuth } from "../providers/auth" //így fogjuk tudni elérni az authot
+import { useAuth } from "../providers/auth" //így fogjuk tudni elérni az authot és a token a providerből
 
 const Home = () => {
     const { counter, increment, decrement } = useCounter("Home");
