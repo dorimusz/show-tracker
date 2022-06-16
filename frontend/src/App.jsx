@@ -9,6 +9,7 @@ import About from './pages/About';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import Callback from './pages/Callback'
+import Protected from './components/Protected';
 
 function App() {
   // const [value, setValue] = useState(0); //no need 
@@ -20,7 +21,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={(
+          <Protected>
+            <Profile />
+          </Protected>
+        )} />
         <Route path="/callback" element={<Callback />} />
       </Routes>
 

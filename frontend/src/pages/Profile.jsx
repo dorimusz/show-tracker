@@ -1,3 +1,4 @@
+//protected component, only logged in user can reach it, other than that, navigates away
 import React from "react";
 import { useCounter } from "../hooks/useCounter";
 import { useCounter as useGlobalCounter } from "../providers/counter";
@@ -8,6 +9,7 @@ const Profile = () => {
     const { value, increment: goUp, decrement: goDown } = useGlobalCounter(); //globális
 
     const { token } = useAuth()
+    console.log(token);
 
     return (
         <>
