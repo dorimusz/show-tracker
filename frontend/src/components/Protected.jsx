@@ -12,7 +12,7 @@ const Protected = ({ children }) => {
         if (!token) {
             navigate('/')
         }
-    }, [])//ha változik a token, renderelje újra, akkor dependencyben meg kell adni neki a tokent
+    }, [token])//ha változik a token, renderelje újra, mert kijelentkezéskor nem dob ki a profilról, ami amúgy protected!!!!!
 
     return (
         <>
