@@ -28,7 +28,8 @@ const AuthProvider = ({ children }) => {
         searchParams.append("prompt", "select_account")
 
         const fullUrl = googleBaseUrl + "?" + searchParams.toString();
-        window.open(fullUrl)
+        window.open(fullUrl, "_self"); //the _self string makes it open in the same tab
+        // window.location.href = fullUrl; //does the same
     };
 
     const login = async (code, provider) => {
