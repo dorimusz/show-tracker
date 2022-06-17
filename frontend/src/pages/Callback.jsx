@@ -14,7 +14,7 @@ const Callback = () => {
             if (code) {
                 await login(code, "google") //post a backendre, amit megvárunk
             }
-            navigate('/')
+            navigate('/profile')
         }
         loginWithCode();
         // eslint-disable-next-line

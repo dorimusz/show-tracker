@@ -1,17 +1,24 @@
 import React, { useContext, createContext, useState } from "react";
 import http from 'axios'
 import { useEffect } from "react";
+import jwt from 'jwt-decode';
+import { toDoApi } from "../api/toDoApi";
 //milyen értéket és metodokat cipelnénk körbe az alkalmazáson - mi fog ide ide kerülni? token
+//ez itt egy react komponenes, de nem tudjuk itt használni a navigatet, mert kívül van az index.js-en, mert az authproviderben van benne a router! de itt megszerezzük az userId-t
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
+    const [user, setUser] = useState(null);
+    const { post } = toDoApi();
 
+    //ha valaki ráfrissít, újra beállítjuk a statejeinket, nem lenne különben bejelentkezve. frissítésnél minden újrakezdődik
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            setToken(token)
+        const tokenInStorage = localStorage.getItem("token");
+        if (tokenInStorage) {
+            setToken(tokenInStorage);
+            setUser(jwt(tokenInStorage)) //nem a useStateből hanem a storageből jön a token
         }
     }, [])
 
@@ -38,9 +45,12 @@ const AuthProvider = ({ children }) => {
                 "code": code,
                 "provider": provider
             });
-            console.log("data", response.data);
+            // console.log("data", response.data);
             setToken(response.data.sessionToken); //amit a backend ad nékünk vissza
             localStorage.setItem("token", response.data.sessionToken);
+
+            setUser(jwt(response.data.sessionToken)); //ez a decoded decoded/user = jwt(response.data.sessionToken)
+            console.log(user);
 
         } catch (error) {
             console.log(error);
@@ -54,7 +64,17 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("token");
     };
 
-    const contextValue = { token, auth, logout, login };
+    const register = async (username) => {
+        const response = await post('user/create', { username });
+
+        if (response?.status === 200) {
+            setToken(response.data.sessionToken);
+            localStorage.setItem("token", response.data.sessionToken);
+            setUser(jwt(response.data.sessionToken));
+        }
+    }
+
+    const contextValue = { token, auth, logout, login, user, register };
 
     return (
         <>
