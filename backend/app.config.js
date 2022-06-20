@@ -2,8 +2,8 @@ const config = {
     auth:
     {
         google: {
-            client_id: process.env.GOOGLE_CLIENT_ID || '353860181683-522o5lhem6l71gh24mrmg1itm7rv6qv0.apps.googleusercontent.com',
-            client_secret: process.env.GOOGLE_CLIENT_SECRET || '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',
+            client_id: process.env.CLIENT_ID_GOOGLE || '3423125049963-vnhlm59vvirdjsquu0efhqvq5u91orks.apps.googleusercontent.com',
+            client_secret: process.env.CLIENT_SECRET_GOOGLE || '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',
             redirect_uri: "http://localhost:3000/callback",
             token_endpoint: "https://oauth2.googleapis.com/token",
             grant_type: "authorization_code",
