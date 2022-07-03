@@ -1,29 +1,64 @@
 import React from "react";
-import { useCounter } from "../hooks/useCounter";
-import { useCounter as useGlobalCounter } from "../providers/counter";
-import { useAuth } from "../providers/auth" //így fogjuk tudni elérni az authot és a token a providerből
+import { useState, useEffect } from "react";
+import { oidApi } from "../api/oidApi";
+import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
-    const { counter, increment, decrement } = useCounter("Home");
-    const { value, increment: goUp, decrement: goDown } = useGlobalCounter();
+    const [searchParams, setSearchParams] = useSearchParams({});
+    const [error, setError] = useState(null)
+    const api = oidApi();
 
-    const { auth, token } = useAuth();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [client, setClient] = useState(null);
+
+    const login = async () => {
+        const response = await api.post('/user/login', {
+            username, password, client
+        })
+        if (!response) return alert("Network error");
+        if (response.status !== 200) return alert("Error!");
+        const code = response.data.code
+
+    };
+
+    const signup = async () => {
+        const response = await api.post('/user/signup', {
+            username, password
+        })
+        if (!response) return alert("Network error");
+        if (response.status !== 200) return alert("Error!");
+        alert("Success!");
+        setPassword("");
+        setUsername("");
+    };
+
+    useEffect(() => {
+        const _client = (searchParams.get('client_id'))
+        if (!_client) {
+            return setError("Missing params")
+        }
+        setClient(_client)
+
+    }, [])
 
     return (
-        <>
-            <h2>Home</h2>
-            <p>{token ? "Logged in" : "Anonymus user"}</p>
-            <button onClick={increment}>+</button>
-            <button onClick={decrement}>-</button>
-            <p>Value home: {counter} </p>
+        <div>
+            <h1 style={{ marginTop: "55px" }}>Home</h1>
+            {
+                error && <div>{error}</div>
+            }
+            {
+                !error && (<div>
+                    <input placeholder="Username" type="text" onChange={(e) => setUsername(e.target.value)} value={username} />
+                    <input placeholder="Password" type="text" onChange={(e) => setPassword(e.target.value)} value={password} />
 
+                    <button onClick={login}>Login</button>
+                    <button onClick={signup}>Signup</button>
+                </div>)
+            }
 
-            <button onClick={goUp}>+</button>
-            <button onClick={goDown}>-</button>
-            <p>Value home: {value} </p>
-
-            {token ? "Welcome" : <button onClick={auth}>Login with Google</button>}
-        </>
+        </div>
     )
 }
 

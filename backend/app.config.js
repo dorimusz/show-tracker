@@ -9,16 +9,20 @@ const config = {
             grant_type: "authorization_code",
             user_endpoint: null,
             user_id: null,
+            scope: "openid"
         },
+
         oid: {
-            client_id: process.env.OID_CLIENT_ID || '12345',
-            client_secret: process.env.OID_CLIENT_SECRET || '54321',
-            redirect_uri: "http://localhost:3000/callbackoid",
+            client_id: process.env.OID_CLIENT_ID || 'mycustomclientid',
+            client_secret: process.env.OID_CLIENT_SECRET || 'mycustomclientsecret',
+            redirect_uri: process.env.OID_REDIRECT_UTI || "http://localhost:3000/oid-callback",
             token_endpoint: "http://localhost:4001/token",
             grant_type: "authorization_code",
             user_endpoint: null,
             user_id: null,
+            scope: "openid",
         },
+
         github: {
             client_id: process.env.GITHUB_CLIENT_ID,
             client_secret: process.env.GITHUB_CLIENT_SECRET,
@@ -27,6 +31,7 @@ const config = {
             grant_type: "authorization_code",
             user_endpoint: 'https://api.github.com/user',
             user_id: "id",
+            scope: "user",
         },
     }
 }
