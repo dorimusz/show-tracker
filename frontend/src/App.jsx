@@ -27,7 +27,7 @@ function App() {
             <Profile />
           </Protected>
         )} />
-        <Route path="/callback" element={<Callback />} />
+        <Route path="/callback/:provider" element={<Callback />} />
         <Route path="/register" element={(
           // azért adtunk keyt, mert azt hiszi, hogy ugyan az a komponens és nem hozza teljesen az elvárt működést
           <Protected key={"2"}>

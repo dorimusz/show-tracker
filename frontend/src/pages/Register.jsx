@@ -7,7 +7,7 @@ import { useAuth } from '../providers/auth';
 const Register = () => {
     const [username, setUsername] = useState("");
     const navigate = useNavigate();
-    const { register, user } = useAuth();
+    const { register, user, auth } = useAuth();
 
     // const triggerRegister = async () => {
     //     await register(username);
@@ -18,11 +18,16 @@ const Register = () => {
     }, [user])
 
     return (
-        <div>
-            <h2>Add username to reg in</h2>
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-            <button onClick={() => register(username)}>Register</button>
-        </div>
+        <>
+            <div>
+                <h2>Add username to reg in</h2>
+                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <button onClick={() => register(username)}>Register</button>
+            </div>
+            <h3>OR</h3>
+            <button onClick={() => auth('google')}>Google</button>
+            <button onClick={() => auth('oid')}>Email</button>
+        </>
     )
 }
 

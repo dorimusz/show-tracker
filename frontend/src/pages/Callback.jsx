@@ -2,17 +2,19 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useAuth } from "../providers/auth"
 import { useNavigate } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 const Callback = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
+    const pathVariables = useParams();
 
     useEffect(() => {
         const loginWithCode = async () => {
             const params = new URLSearchParams(window.location.search);
             const code = params.get("code")
             if (code) {
-                await login(code, "google") //post a backendre, amit megvárunk
+                await login(code, pathVariables.provider) //post a backendre, amit megvárunk
             }
             navigate('/profile')
         }
