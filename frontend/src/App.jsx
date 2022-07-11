@@ -9,6 +9,7 @@ import Callback from './pages/Callback'
 import Protected from './components/Protected';
 import Register from './pages/Register';
 import CompleteShow from './pages/CompleteShow';
+import Watchlist from './pages/Watchlist';
 // import Sidebar from './components/Sidebar';
 
 function App() {
@@ -24,6 +25,11 @@ function App() {
         <Route path="/profile" element={(
           <Protected key={"1"}>
             <Profile />
+          </Protected>
+        )} />
+        <Route path="/watchlist" element={(
+          <Protected key={"1"}>
+            <Watchlist />
           </Protected>
         )} />
         <Route path="/callback/:provider" element={<Callback />} />

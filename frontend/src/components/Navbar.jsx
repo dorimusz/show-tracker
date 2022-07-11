@@ -17,6 +17,7 @@ const Navbar = () => {
                 <div>
                     <button onClick={() => nav('/')}>Home</button>
                     <button onClick={() => nav('/search')} > Search</button>
+                    <button onClick={() => nav('/watchlist')} > Watchlist</button>
                     {/* <button onClick={() => navigate('/profile')} > Profile</button> */}
                     <Link to="/profile" > Profile</Link>
                 </div>
