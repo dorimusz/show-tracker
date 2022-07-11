@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/user');
 const Client = require('../models/client');
+const jwt = require("jsonwebtoken");
 
 router.post('/signup', async (req, res) => {
     if (!req.body?.username || !req.body.password) return res.sendStatus(400);
@@ -25,6 +26,8 @@ router.post('/login', async (req, res) => {
     const client = await Client.findOne({ client_id: req.body.client });
 
     if (!client) return res.sendStatus(401);
+    console.log(client.redirect_uri)
+    console.log(req.body.redirect_uri)
     if (client.redirect_uri !== req.body.redirectUri) return res.sendStatus(401);
 
     const code = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
@@ -37,6 +40,23 @@ router.post('/login', async (req, res) => {
     await client.save();
 
     res.json({ code })
+});
+
+router.post('/token', async (req, res) => {
+    if (!req.body.code || !req.body.client_id || !req.body.client_secret) return res.sendStatus(400);
+
+    const client = await Client.findOne({ client_id: req.body.client_id, client_secret: req.body.client_secret });
+
+    if (!client) return res.sendStatus(401);
+
+    const user = client.users.find(u => u.code === req.body.code);
+
+    if (!user) return res.sendStatus(401);
+
+    const token = jwt.sign({ sub: user.userId }, "shhhh", { expiresIn: "1h" });
+
+    res.json({ id_token: token });
+
 });
 
 module.exports = router;

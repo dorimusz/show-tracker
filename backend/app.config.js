@@ -2,9 +2,9 @@ const config = {
     auth:
     {
         google: {
-            client_id: process.env.GOOGLE_CLIENT_ID || '3423125049963-vnhlm59vvirdjsquu0efhqvq5u91orks.apps.googleusercontent.com',
-            client_secret: process.env.GOOGLE_CLIENT_SECRET || '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',
-            redirect_uri: "http://localhost:3000/callback",
+            client_id: process.env.GOOGLE_CLIENT_ID || '282852055754-n7u6ebt1k06hchj071s7r7fh92t77f9r.apps.googleusercontent.com',
+            client_secret: process.env.GOOGLE_CLIENT_SECRET || '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',
+            redirect_uri: "http://localhost:3000/callback/google",
             token_endpoint: "https://oauth2.googleapis.com/token",
             grant_type: "authorization_code",
             user_endpoint: null,
@@ -13,10 +13,10 @@ const config = {
         },
 
         oid: {
-            client_id: process.env.OID_CLIENT_ID || 'mycustomclientid',
-            client_secret: process.env.OID_CLIENT_SECRET || 'mycustomclientsecret',
-            redirect_uri: process.env.OID_REDIRECT_UTI || "http://localhost:3000/oid-callback",
-            token_endpoint: "http://localhost:4001/token",
+            client_id: process.env.OID_CLIENT_ID || 'mycid',
+            client_secret: process.env.OID_CLIENT_SECRET || 'mycsecret',
+            redirect_uri: process.env.OID_REDIRECT_UTI || "http://localhost:3001/callback/oid",
+            token_endpoint: "http://localhost:8080/api/user/token",
             grant_type: "authorization_code",
             user_endpoint: null,
             user_id: null,

@@ -11,7 +11,7 @@ const Home = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [client, setClient] = useState(null);
-    const [redirectUri, setRedirectUri] = useState("");
+    const [redirectUri, setRedirectUri] = useState(null);
 
     const login = async () => {
         const response = await api.post('/user/login', {

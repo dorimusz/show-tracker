@@ -22,7 +22,11 @@ const Home = () => {
             <button onClick={goDown}>-</button>
             <p>Value home: {value} </p>
 
-            {token ? "Welcome" : <button onClick={auth}>Login with Google</button>}
+            {token ? "Welcome" : <>
+                <button onClick={() => auth('google')}>Login with Google</button>
+                <button onClick={() => auth('oid')}>Log in with email</button>
+            </>}
+
         </>
     )
 }

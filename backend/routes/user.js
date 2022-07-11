@@ -1,4 +1,3 @@
-// require("dotenv").config();
 const router = require('express').Router();
 const http = require('../utils/http'); //ide jön a baseurl, mint pl a tokenendpoint legeleje
 const jwt = require('jsonwebtoken')
@@ -6,10 +5,9 @@ const User = require('../models/user');
 const auth = require('../middlewares/auth')
 const config = require('../app.config')
 
-//ha nincs headerje, akkor is be tud jelentkezni
-router.post('/login', auth({ block: false }), async (req, res) => {
+router.post('/login', auth({ block: false }), async (req, res) => { //ha nincs headerje, akkor is be tud jelentkezni
     const payload = req.body;
-    if (!payload) return res.sendStatus(400);
+    if (!payload) return res.status(400).send('Nice try');
 
     const code = payload.code;
     const provider = payload.provider;
@@ -23,15 +21,17 @@ router.post('/login', auth({ block: false }), async (req, res) => {
         "client_secret": config.auth[provider].client_secret,
         "redirect_uri": config.auth[provider].redirect_uri,
         "grant_type": config.auth[provider].grant_type,
-    }, {
-        headers: {
-            Accept: "application/json"
-        }
-    })
+    },
+        {
+            headers: {
+                Accept: "application/json"
+            }
+        })
 
-    if (!response) return res.sendStatus(500);
-    if (response.status !== 200) return res.sendStatus(401); //amit a google ad, nem 200-as, akkor nem tudjuk azonosítani
+    if (!response) return res.status(500).send('Token provider error');
+    if (response.status !== 200) return res.status(401).send('oid provider error'); //amit a google ad, nem 200-as, akkor nem tudjuk azonosítani
 
+    console.log(response.data)
     //github oauth flowjahoz
     let openId;
     const onlyOauth = !response.data.id_token;
@@ -48,6 +48,8 @@ router.post('/login', auth({ block: false }), async (req, res) => {
         })
         if (!response) return res.sendStatus(500);
         if (response.status !== 200) return res.sendStatus(401);
+
+        clg(response.data)
 
         const id = config.auth[provider].user_id;
         openId = userResponse.data[id];

@@ -21,7 +21,14 @@ const Navbar = () => {
                     <Link to="/profile" > Profile</Link>
                 </div>
                 <div>
-                    {token ? <button onClick={logout}>Log out</button> : <button onClick={auth}>Login</button>}
+                    {token ?
+                        <button onClick={logout}>Log out</button>
+                        :
+                        <>
+                            <button onClick={() => auth('google')}>Google login</button>
+                            <button onClick={() => auth('oid')}>Login</button>
+                        </>
+                    }
                 </div>
             </nav >
         </>

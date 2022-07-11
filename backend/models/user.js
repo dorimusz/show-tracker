@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
     // googleID: { type: String, unique: true, required: true }, //google auth miatt + !!!UNIQUE
     providers: {
         google: { type: String, sparse: true, unique: true },
+        oid: { type: String, sparse: true, unique: true },
         github: { type: String, sparse: true, unique: true },
         // google: { type: String, unique: true },
         // github: { type: String, unique: true },

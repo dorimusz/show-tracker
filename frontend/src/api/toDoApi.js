@@ -1,8 +1,9 @@
 import http from "axios"
+import config from '../app.config'
 
 export const toDoApi = () => {
     const instance = http.create({
-        baseURL: 'http://localhost:4000/api',
+        baseURL: config.todoapi,
         timeout: 3000, //szállj ki, 
     });
 
@@ -37,7 +38,7 @@ export const toDoApi = () => {
             return error.response;
         }
     }
-    return { post, get }
+    return { post, get, _instance: instance }
 
 }
 

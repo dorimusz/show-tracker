@@ -1,5 +1,4 @@
 import React, { useContext, createContext, useState } from "react";
-import http from 'axios'
 import { useEffect } from "react";
 import jwt from 'jwt-decode';
 import { toDoApi } from "../api/toDoApi";
@@ -25,20 +24,22 @@ const AuthProvider = ({ children }) => {
 
 
     //megszerezzük a tokent, hogy autentikálhassunk. az, hogy hogyan állítjuk be, itt nem érdekes??
-    const auth = () => {
+    const auth = (provider) => {
         //ide rejtjük el az autentikálós izét
-        const googleBaseUrl = config.google_base_url;
+        const baseUrl = config[provider].base_url;
+        console.log(config[provider].base_url);
         const searchParams = new URLSearchParams();
-        searchParams.append("client_id", config.google_client_id);
+        searchParams.append("client_id", config[provider].client_id);
         searchParams.append("scope", "openid");
-        searchParams.append("redirect_uri", window.location.origin + "/callback");
+        searchParams.append("redirect_uri", window.location.origin + "/callback/" + provider);
         searchParams.append("response_type", "code");
         searchParams.append("prompt", "select_account")
 
-        const fullUrl = googleBaseUrl + "?" + searchParams.toString();
+        const fullUrl = baseUrl + "?" + searchParams.toString();
         window.open(fullUrl, "_self"); //the _self string makes it open in the same tab
         // window.location.href = fullUrl; //does the same
     };
+
 
     const login = async (code, provider) => {
         try {
