@@ -9,11 +9,7 @@ const SearchShows = () => {
     const [shows, setShows] = useState([]);
 
     const load = async () => {
-        console.log(searchUrl.length)
         const response = await http.get(`https://api.tvmaze.com/search/shows?q=${searchUrl}`)
-
-        console.log(response)
-        console.log(response.data)
         setShows(response.data)
     }
 

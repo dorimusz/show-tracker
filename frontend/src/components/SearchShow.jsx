@@ -6,11 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 const SearchShow = ({ searchedShow }) => {
     const navigate = useNavigate();
-    const images = searchedShow.show.image.original;
+    // const images = (searchedShow.show.image.medium).toString();
     const genres = searchedShow.show.genres.toString().split(',').join(', ');
-
-    console.log(genres.toString())
-    console.log(genres.slice());
 
     const showDetails = (id) => {
         id = searchedShow.show.id
@@ -20,7 +17,7 @@ const SearchShow = ({ searchedShow }) => {
     return (
         <div className='showCard'>
             <div className='showImage'>
-                <img src={images} alt={searchedShow.show.name} />
+                {searchedShow.show?.image?.medium ? <img src={searchedShow.show.image.medium} alt="kep" /> : <img src='https://via.placeholder.com/210x295/ffffff/c0c0c0?text=No+image' alt={searchedShow.show.name} />}
             </div>
             <div className='showInfos'>
                 <h3>{searchedShow.show.name}</h3>
