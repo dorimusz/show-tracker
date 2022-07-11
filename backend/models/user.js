@@ -1,32 +1,43 @@
 const mongoose = require('mongoose');
 
 //subdocuments, no need to make model out of them
-const todoSchema = new mongoose.Schema({
-    title: { type: String, required: true }, //empty string is not accepted
-    description: { type: String, required: true }, //empty string IS enough
-    isDone: { type: Boolean, default: false },
+const episodeSchema = new mongoose.Schema({
+    name: { type: String }, //ide lehet felesleges?
+    season: { type: String },
+    epNumber: { type: String },
+    airdate: { type: String },
+    watched: { type: Boolean }
 });
 
-const dashboardSchema = new mongoose.Schema({
+const tvShowSchema = new mongoose.Schema({
+    showId: { type: String },
+    name: { type: String },
+    type: { type: String },
+    language: { type: String },
+    genres: { type: Array },
+    status: { type: String },
+    runtime: { type: String },
+    netwrok: { type: String },
+    image: { type: String },
+    summary: { type: String },
+    seasons: [episodeSchema],
+    isIgnored: { type: Boolean }, //ignored or not, showing on show overview page
+    isDeleted: { type: Boolean } //if deleted from watchlist
+})
+
+
+const watchlistSchema = new mongoose.Schema({
     title: { type: String, required: true },
-    todos: [todoSchema],
+    seriesList: [tvShowSchema],
 });
 
-//uses the subdocuments
 const userSchema = new mongoose.Schema({
     username: { type: String }, //empty string is not accepted + !!!UNIQUE
-    // googleID: { type: String, unique: true, required: true }, //google auth miatt + !!!UNIQUE
     providers: {
         google: { type: String, sparse: true, unique: true },
         oid: { type: String, sparse: true, unique: true },
-        github: { type: String, sparse: true, unique: true },
-        // google: { type: String, unique: true },
-        // github: { type: String, unique: true },
-        facebook: { type: String, sparse: true, unique: true }
     },
-    // email: { type: String, unique: true, required: true }, //empty string is not accepted + validation + !!!UNIQUE
-    // password: { type: String, required: true }, //empty string is not accepted + validation
-    dashboards: [dashboardSchema], //empty list as default
+    watchlist: [watchlistSchema], //empty list as default
 });
 
 const User = mongoose.model("user", userSchema);

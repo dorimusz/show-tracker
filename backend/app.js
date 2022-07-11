@@ -10,20 +10,20 @@ const errorHandler = require('./middlewares/errorHandler')
 const auth = require('./middlewares/auth')
 
 app.use(cors({
-    origin: process.env.HOST, //a frontend localhostja
+    origin: process.env.HOST,
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }));;
-app.use(express.json()); //bodyban érkező json parseolásáért felel
-// app.use(logger); //minden hívásnál automatikusan lefut ez a middleware
-app.use(morgan(":method :url :status :res[content-length] - :response-time ms")); // use this middleware on every request, logger
-// app.use(auth); //de ezt nem akarom minden endpoint hívásnál meghívni, ezért elehlyezhetem másként, a (req, res) elé
-// app.use(auth()); //így is használható amúgy te csicskagyász
+app.use(express.json());
+app.use(morgan(":method :url :status :res[content-length] - :response-time ms"));
+
 
 //routes:
-const dashboardRoutes = require('./routes/dashboard');
-app.use('/api/dashboards', dashboardRoutes)
 const userRoutes = require('./routes/user');
 app.use('/api/user', userRoutes)
+const watchlistRoutes = require('./routes/watchlist');
+app.use('/api/watchlist', watchlistRoutes)
+const requestRoutes = require('./routes/request');
+app.use('/api/request', requestRoutes)
 
 app.get('/api/public', (req, res) => {
     console.log('public');
