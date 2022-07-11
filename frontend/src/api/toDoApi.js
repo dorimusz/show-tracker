@@ -4,21 +4,19 @@ import config from '../app.config'
 export const toDoApi = () => {
     const instance = http.create({
         baseURL: config.todoapi,
-        timeout: 3000, //szállj ki, 
+        timeout: 3000,
     });
 
-    // url, body +options helyett a ...params is mehetne
     const post = async (path, data) => {
         try {
             const response = await instance.post(path, data, {
                 headers: {
                     "authorization": localStorage.getItem("token")
                 }
-            }) //ez z axios instanceit hozza magával
+            })
             console.log("RESPONSE DATA:", response.data);
             return response
         } catch (error) {
-            // console.log('(post) error resp: ' + error.response);
             console.log('(post) error  data: ' + error.response.data);
             return error.response
         }

@@ -7,7 +7,7 @@ const Navbar = () => {
     const { auth, token, logout } = useAuth();
 
     const nav = (path) => {
-        console.log("rerouting"); //bármilyen route előtti logika, elágazás, lejárt-e a token stb
+        console.log("rerouting");
         navigate(path)
     }
 

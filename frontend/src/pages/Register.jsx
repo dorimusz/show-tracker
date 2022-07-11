@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import http from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../providers/auth';
 
@@ -8,10 +7,6 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const navigate = useNavigate();
     const { register, user, auth } = useAuth();
-
-    // const triggerRegister = async () => {
-    //     await register(username);
-    // }
 
     useEffect(() => {
         if (user.userId) navigate('/profile')

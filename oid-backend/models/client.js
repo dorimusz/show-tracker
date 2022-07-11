@@ -13,5 +13,4 @@ const clientSchema = new mongoose.Schema({
 });
 
 const Client = mongoose.model("client", clientSchema);
-// Client.create({ client_id: '12345', client_secret: '12345', redirect_uri: 'http://localhost:3000/oid-callback' });
 module.exports = Client
