@@ -11,15 +11,17 @@ const Home = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [client, setClient] = useState(null);
+    const [redirectUri, setRedirectUri] = useState("");
 
     const login = async () => {
         const response = await api.post('/user/login', {
-            username, password, client
+            username, password, client, redirectUri
         })
         if (!response) return alert("Network error");
         if (response.status !== 200) return alert("Error!");
         const code = response.data.code
-
+        console.log(code);
+        window.location.href = redirectUri + "?code=" + code;
     };
 
     const signup = async () => {
@@ -35,10 +37,15 @@ const Home = () => {
 
     useEffect(() => {
         const _client = (searchParams.get('client_id'))
+        const _redirectUri = (searchParams.get('redirect_uri'))
         if (!_client) {
-            return setError("Missing params")
+            return setError("Missing params - client_id")
+        }
+        if (!_redirectUri) {
+            return setError("Missing params - redirect_uri")
         }
         setClient(_client)
+        setRedirectUri(_redirectUri)
 
     }, [])
 

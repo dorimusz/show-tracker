@@ -17,7 +17,7 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    if (!req.body?.username || !req.body.password || !req.body.client) return res.sendStatus(400);
+    if (!req.body?.username || !req.body.password || !req.body.client || !req.body.redirectUri) return res.sendStatus(400);
 
     const users = await User.find({ username: req.body.username, password: req.body.password }); //hash
     if (!users.length) return res.sendStatus(401)
@@ -25,6 +25,7 @@ router.post('/login', async (req, res) => {
     const client = await Client.findOne({ client_id: req.body.client });
 
     if (!client) return res.sendStatus(401);
+    if (client.redirect_uri !== req.body.redirectUri) return res.sendStatus(401);
 
     const code = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
