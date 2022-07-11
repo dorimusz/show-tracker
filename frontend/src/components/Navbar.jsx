@@ -7,7 +7,6 @@ const Navbar = () => {
     const { auth, token, logout } = useAuth();
 
     const nav = (path) => {
-        console.log("rerouting");
         navigate(path)
     }
 

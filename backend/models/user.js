@@ -6,28 +6,26 @@ const episodeSchema = new mongoose.Schema({
     season: { type: String },
     epNumber: { type: String },
     airdate: { type: String },
-    watched: { type: Boolean }
+    watched: { type: Boolean, default: false }
 });
 
 const tvShowSchema = new mongoose.Schema({
     showId: { type: String },
     name: { type: String },
-    type: { type: String },
-    language: { type: String },
     genres: { type: Array },
     status: { type: String },
     runtime: { type: String },
-    netwrok: { type: String },
+    network: { type: String },
     image: { type: String },
     summary: { type: String },
     seasons: [episodeSchema],
-    isIgnored: { type: Boolean }, //ignored or not, showing on show overview page
-    isDeleted: { type: Boolean } //if deleted from watchlist
+    isIgnored: { type: Boolean, default: false }, //ignored or not, showing on show overview page
+    isDeleted: { type: Boolean, default: false } //if deleted from watchlist
 })
 
 
 const watchlistSchema = new mongoose.Schema({
-    title: { type: String, required: true },
+    // title: { type: String, required: true },
     seriesList: [tvShowSchema],
 });
 

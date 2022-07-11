@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Episode = (episode) => {
-
     return (
         <div className='episode'>
             <p>{episode.episode.airdate}</p>

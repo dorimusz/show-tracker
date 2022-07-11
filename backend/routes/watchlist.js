@@ -18,19 +18,15 @@ router.get('/', auth({ block: false }), async (req, res) => {
     res.json({ user });
 });
 
-/* no need for these right now
-router.get('/api/dashboards/:id', async (req, res) => {
-    // send one specific dashboard(:id) connected to user
+router.post('/', auth({ block: true }), async (req, res) => {
+    const parsedId = JSON.parse(res.locals.user.userId) //kiszedni a useridt
+    const user = await User.findById({ '_id': ObjectId(parsedId) })
 });
 
-router.get('/api/dashboards/:id/todos', async (req, res) => {
-    // send todos connected to a specific dashboard
-});
-*/
+router.delete('/', async (req, res) => {
 
-router.get('/:id/todos/:todoId', auth({ block: true }), async (req, res) => {
-    // send todId of a todo connected to a specific dashboard
-});
+})
+
 
 router.post('/', auth({ block: true }), async (req, res) => {
     // create dashboard for user, send created :id
@@ -42,24 +38,5 @@ router.post('/', auth({ block: true }), async (req, res) => {
     return res.json({ dashboards: user.dashboards })
 });
 
-router.post('/:id/todos', async (req, res) => {
-    // create todo for a specific dashboard, send created :todoId
-});
-
-router.patch('/:id', async (req, res) => {
-    // updating an existing dashboard
-});
-
-router.patch('/:id/todos/:todoId', async (req, res) => {
-    // updating an existing todo connected to a dashboard
-});
-
-router.delete('/:id', async (req, res) => {
-    //  delete dashboard
-})
-
-router.delete('/api/dashboards/:id', async (req, res) => {
-    //  delete dashboard
-})
 
 module.exports = router;
