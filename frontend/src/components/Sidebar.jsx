@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../providers/auth';
 
-const Navbar = () => {
+const Sidebar = () => {
     const navigate = useNavigate();
     const { auth, token, logout } = useAuth();
 
@@ -16,7 +16,7 @@ const Navbar = () => {
             <nav className='navbar' style={{ backgroundColor: "gray", position: "absolute", top: "0", width: "100%", display: "flex", justifyContent: "space-between" }}>
                 <div>
                     <button onClick={() => nav('/')}>Home</button>
-                    <button onClick={() => nav('/search')} > Search</button>
+                    <button onClick={() => nav('/about')} > About</button>
                     {/* <button onClick={() => navigate('/profile')} > Profile</button> */}
                     <Link to="/profile" > Profile</Link>
                 </div>
@@ -35,4 +35,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default Sidebar
