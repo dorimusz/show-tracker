@@ -2,11 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 // import { Popup } from "reactjs-popup";
 // import 'reactjs-popup/dist/index.css';
-// import LeaveReview from './LeaveReview';
 
 const SearchShow = ({ searchedShow }) => {
     const navigate = useNavigate();
-    // const images = (searchedShow.show.image.medium).toString();
     const genres = searchedShow.show.genres.toString().split(',').join(', ');
 
     const showDetails = (id) => {

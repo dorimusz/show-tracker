@@ -14,7 +14,6 @@ const Eps = (ep) => {
             </div>
             <button>Add to watched</button>
         </>
-
     )
 }
 
@@ -25,51 +24,44 @@ const CompleteShowModify = () => {
     console.log("selected shows' id FE: " + showid);
 
     const [show, setShow] = useState([]);
-    // const showid = window.location.href.split("/")[4];
 
     const getShow = async () => {
         const response = await get(`/watchlist/show/${showid}`)
         setShow(response.data)
         console.log(response.data.name);
     }
-    // console.log(show);
-
     useEffect(() => {
         getShow()
     }, [])
-
-
 
     return (
         <>
             <div>
                 <h2>Manage your <span>{show.name}</span> episodes</h2>
                 <div>
-                    {token ? <div>
-                        <h3>Season info</h3>
-                        {show.name}
+                    {token
+                        ?
+                        <div>
+                            <h3>Season info</h3>
+                            {show.name}
 
-                        {/* <div className='showImage'>
-                {searchedShow.show?.image?.medium ? <img src={searchedShow.show.image.medium} alt="kep" /> : <img src='https://via.placeholder.com/210x295/ffffff/c0c0c0?text=No+image' alt={searchedShow.show.name} />}
-            </div> */}  <div className='showImage'>
-                            {show?.image?.medium ? <img src={show.image.medium} alt="kep" /> : <img src='https://via.placeholder.com/210x295/ffffff/c0c0c0?text=No+image' alt={show.name} />}
+                            <div className='showImage'>
+                                {show?.image?.medium ? <img src={show.image.medium} alt="kep" /> : <img src='https://via.placeholder.com/210x295/ffffff/c0c0c0?text=No+image' alt={show.name} />}
+                            </div>
+                            <div className='showInfo'>
+                                <p>Category: {show.genres.toString().split(',').join(', ')}</p>
+                                <p>Episode length: {show.runtime}</p>
+                                <p>Status: {show.status}</p>
+                                {/* <p>Summary: {show.summary}</p> */}
+                            </div>
+
+                            <h3>Episodes</h3>
+                            {show.seasons.map((ep, i) => <Eps ep={ep} key={i} />)}
+
                         </div>
-                        <div className='showInfo'>
-                            <p>Category: {show.genres.toString().split(',').join(', ')}</p>
-                            <p>Episode length: {show.runtime}</p>
-                            <p>Status: {show.status}</p>
-                            {/* <p>Summary: {show.summary}</p> */}
-                        </div>
-
-                        <h3>Episodes</h3>
-                        {show.seasons.map((ep, i) => <Eps ep={ep} key={i} />)}
-
-                    </div>
                         :
                         "Please login to manage your watchlist"}
                 </div>
-
-
             </div>
         </>
     )
