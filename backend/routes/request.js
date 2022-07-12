@@ -2,7 +2,10 @@ const router = require('express').Router();
 const auth = require('../middlewares/auth')
 const Request = require('../models/request')
 
-router.get('/', auth, async (req, res) => {
+router.get('/', auth({ block: true }), async (req, res) => {
+    let response = await Request.find({})
+    console.log(response)
+    res.json(response)
 
 })
 

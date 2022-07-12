@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const requestSchema = new mongoose.Schema({
     title: { type: String, required: true },
     comment: { type: String },
-    timestamp: { type: Date, default: Date.now },
     status: { type: String, default: "pending" },
+    timestamp: { type: Date, default: Date.now },
 })
 
 const Request = mongoose.model("request", requestSchema);
