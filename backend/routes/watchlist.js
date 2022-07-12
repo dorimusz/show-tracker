@@ -8,8 +8,27 @@ router.get('/', auth({ block: true }), async (req, res) => {
     const tokenPayload = jwt.decode(token);
     console.log(tokenPayload)
 
+    console.log("userid: " + tokenPayload.userId)
     const user = await User.findById(tokenPayload.userId);
+    console.log("user: " + user)
+
+
     return res.json({ watchlist: user.watchlist })
+});
+
+router.get('/show/:showid', auth({ block: true }), async (req, res) => {
+    const token = req.headers.authorization;
+    const tokenPayload = jwt.decode(token);
+    // console.log("userid: " + tokenPayload.userId)
+    const user = await User.findById(tokenPayload.userId);
+    userWatchlist = user.watchlist;
+    // console.log(typeof userWatchlist)
+    console.log("USER WATCHLIST showd: " + userWatchlist.showid)
+    const showid = req.params.showid;
+
+    const filteredWatchlist = userWatchlist.filter((e) => e.showId === showid);
+    // console.log(filteredWatchlist[0])
+    return res.json(filteredWatchlist[0])
 });
 
 router.post('/', auth({ block: true }), async (req, res) => {

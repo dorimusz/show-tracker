@@ -20,6 +20,8 @@ app.use(morgan(":method :url :status :res[content-length] - :response-time ms"))
 //routes:
 const userRoutes = require('./routes/user');
 app.use('/api/user', userRoutes)
+const showRoutes = require('./routes/show');
+app.use('/api/show/:showid', showRoutes)
 const watchlistRoutes = require('./routes/watchlist');
 app.use('/api/watchlist', watchlistRoutes)
 const requestRoutes = require('./routes/request');

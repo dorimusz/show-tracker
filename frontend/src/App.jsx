@@ -10,6 +10,7 @@ import Protected from './components/Protected';
 import Register from './pages/Register';
 import CompleteShow from './pages/CompleteShow';
 import Watchlist from './pages/Watchlist';
+import CompleteShowModify from './pages/CompleteShowModify';
 // import Sidebar from './components/Sidebar';
 
 function App() {
@@ -22,11 +23,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<SearchShows />} />
         <Route path="/show/:id/episodes" element={<CompleteShow />} />
+        <Route path="/watchlist/show/:id" element={<CompleteShowModify />} />
+
         <Route path="/profile" element={(
           <Protected key={"1"}>
             <Profile />
           </Protected>
         )} />
+
         <Route path="/watchlist" element={(
           <Protected key={"1"}>
             <Watchlist />

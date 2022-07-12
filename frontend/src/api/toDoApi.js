@@ -14,7 +14,7 @@ export const toDoApi = () => {
                     "authorization": localStorage.getItem("token")
                 }
             })
-            console.log("RESPONSE DATA:", response.data);
+            // console.log("RESPONSE DATA:", response.data);
             return response
         } catch (error) {
             console.log('(post) error  data: ' + error.response.data);
