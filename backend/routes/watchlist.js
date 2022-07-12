@@ -46,6 +46,28 @@ router.post('/', auth({ block: true }), async (req, res) => {
     return res.status(200).json({ watchlist: user.watchlist })
 });
 
+router.post('/watch', auth({ block: true }), async (req, res) => {
+    const payload = req.body;
+    if (!payload) return res.status(400).send('Nice try');
+
+    const token = req.headers.authorization;
+    const tokenPayload = jwt.decode(token);
+
+    const user = await User.findById(tokenPayload.userId);
+    user.watchlist = user.watchlist.map((watchlist) => watchlist.showId === payload.showid ? parseWatchlist(watchlist, payload.id) : watchlist)
+    // console.log(user.watchlist)
+
+    await user.save().catch((err) => res.sendStatus(500).send(err));
+    return res.status(200).json({ watchlist: user.watchlist })
+});
+
+const parseWatchlist = (watchlist, id) => {
+    return {
+        ...watchlist,
+        seasons: watchlist.seasons.map((season) => season.id == id ? ({ ...season, watched: true }) : season)
+    }
+}
+
 router.delete('/', async (req, res) => {
 
 })

@@ -3,16 +3,22 @@ import { useState, useEffect } from 'react'
 import { useAuth } from "../providers/auth";
 import { toDoApi } from '../api/toDoApi';
 
-const Eps = (ep) => {
+const Eps = ({ ep, showid }) => {
+    const watchEpisode = async () => {
+        const { post } = toDoApi();
+        const response = await post(`/watchlist/watch`, { showid, id: ep._id })
+
+    }
+
     return (
         <>
             <div className='episodeLine'>
-                {ep.ep.airdate}
-                {ep.ep.name}
-                {ep.ep.season}
-                {ep.ep.epNumber}
+                {ep.airdate}
+                {ep.name}
+                {ep.season}
+                {ep.epNumber}
             </div>
-            <button>Add to watched</button>
+            <button onClick={watchEpisode}>Add to watched</button>
         </>
     )
 }
@@ -49,14 +55,14 @@ const CompleteShowModify = () => {
                                 {show?.image?.medium ? <img src={show.image.medium} alt="kep" /> : <img src='https://via.placeholder.com/210x295/ffffff/c0c0c0?text=No+image' alt={show.name} />}
                             </div>
                             <div className='showInfo'>
-                                <p>Category: {show.genres.toString().split(',').join(', ')}</p>
+                                <p>Category: {show?.genres?.toString().split(',').join(', ')}</p>
                                 <p>Episode length: {show.runtime}</p>
                                 <p>Status: {show.status}</p>
                                 {/* <p>Summary: {show.summary}</p> */}
                             </div>
 
                             <h3>Episodes</h3>
-                            {show.seasons.map((ep, i) => <Eps ep={ep} key={i} />)}
+                            {show?.seasons?.map((ep, i) => <Eps ep={ep} key={i} showid={showid} />)}
 
                         </div>
                         :
