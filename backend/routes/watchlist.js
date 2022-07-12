@@ -10,8 +10,6 @@ router.get('/', auth({ block: true }), async (req, res) => {
 
     console.log("userid: " + tokenPayload.userId)
     const user = await User.findById(tokenPayload.userId);
-    console.log("user: " + user)
-
 
     return res.json({ watchlist: user.watchlist })
 });
