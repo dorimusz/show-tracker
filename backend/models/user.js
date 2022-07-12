@@ -17,17 +17,16 @@ const tvShowSchema = new mongoose.Schema({
     runtime: { type: String },
     network: { type: String },
     image: { type: String },
-    summary: { type: String },
     seasons: [episodeSchema],
     isIgnored: { type: Boolean, default: false }, //ignored or not, showing on show overview page
     isDeleted: { type: Boolean, default: false } //if deleted from watchlist
 })
 
 
-const watchlistSchema = new mongoose.Schema({
-    // title: { type: String, required: true },
-    seriesList: [tvShowSchema],
-});
+// const watchlistSchema = new mongoose.Schema({
+//     // title: { type: String, required: true },
+//     seriesList: [tvShowSchema],
+// });
 
 const userSchema = new mongoose.Schema({
     username: { type: String }, //empty string is not accepted + !!!UNIQUE
@@ -35,7 +34,7 @@ const userSchema = new mongoose.Schema({
         google: { type: String, sparse: true, unique: true },
         oid: { type: String, sparse: true, unique: true },
     },
-    watchlist: [watchlistSchema], //empty list as default
+    watchlist: [tvShowSchema], //empty list as default
 });
 
 const User = mongoose.model("user", userSchema);

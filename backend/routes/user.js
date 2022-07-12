@@ -72,25 +72,6 @@ router.post('/login', auth({ block: false }), async (req, res) => { //ha nincs h
         user = await user.save();
     }
 
-    /*
-    //account merge előtt
-    let user = await User.findOneAndUpdate(
-        { [key]: openId },
-        { "providers": { [provider]: openId } },
-        { upsert: true, new: true }
-    );
-    */
-    /*
-    const user = {username: "random", profile: {
-        id: "randomstring",
-        account: {
-            balance: "..",
-            id: ".."
-        }
-    }}
-    const b1 = (user && user.profile && user.profile.account) ? user.profile.account.balance : null //a b1 értéke balance vagy semmi
-    const b1 = user?.profile?.account?.balance
-    */
 
     //optional chaining user?. = user ? user._id : null
     const sessionToken = jwt.sign({ "userId": user?._id, "providers": user ? user.providers : { [provider]: openId } }, process.env.JWT_SECRET, { expiresIn: "1h" }); //ezt az id-t a mongoDB adta nekik, secret key, expires in

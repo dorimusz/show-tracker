@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const auth = require('../middlewares/auth')
 const User = require('../models/user')
-const ObjectId = require('mongodb').ObjectID;
+// const ObjectId = require('mongodb').ObjectID;
+const jwt = require('jsonwebtoken')
 
-router.get('/', auth({ block: false }), async (req, res) => {
+router.get('/', auth({ block: true }), async (req, res) => {
     // 1. needs auth middleware with block
     // 2. find user with userID from res.locals.Id
     // 3. return user.dashboards; send all dashboards connected to a user from mongoDB
@@ -19,8 +20,20 @@ router.get('/', auth({ block: false }), async (req, res) => {
 });
 
 router.post('/', auth({ block: true }), async (req, res) => {
-    const parsedId = JSON.parse(res.locals.user.userId) //kiszedni a useridt
-    const user = await User.findById({ '_id': ObjectId(parsedId) })
+    const payload = req.body;
+    if (!payload) return res.status(400).send('Nice try');
+
+    const token = req.headers.authorization;
+    const tokenPayload = jwt.decode(token);
+    console.log(tokenPayload)
+
+    const user = await User.findById(tokenPayload.userId);
+
+    user.watchlist.push(payload);
+    await user.save().catch((err) => res.sendStatus(500).send(err));
+    return res.json({ watchlist: user.watchlist })
+
+
 });
 
 router.delete('/', async (req, res) => {
@@ -28,15 +41,6 @@ router.delete('/', async (req, res) => {
 })
 
 
-router.post('/', auth({ block: true }), async (req, res) => {
-    // create dashboard for user, send created :id
-    const parsedId = JSON.parse(res.locals.user.userId)
-    const user = await User.findById({ '_id': ObjectId(parsedId) });
-
-    user.dashboards.push({ title: req.body.title });   //MIÉRT NULL EZ A CSICSKAGYÁSZ és mit csináljak vele anyád user.dashboard
-    await user.save().catch((err) => res.sendStatus(500).send(err));
-    return res.json({ dashboards: user.dashboards })
-});
 
 
 module.exports = router;
