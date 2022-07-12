@@ -1,22 +1,15 @@
 const router = require('express').Router()
 const auth = require('../middlewares/auth')
 const User = require('../models/user')
-// const ObjectId = require('mongodb').ObjectID;
 const jwt = require('jsonwebtoken')
 
 router.get('/', auth({ block: true }), async (req, res) => {
-    // 1. needs auth middleware with block
-    // 2. find user with userID from res.locals.Id
-    // 3. return user.dashboards; send all dashboards connected to a user from mongoDB
+    const token = req.headers.authorization;
+    const tokenPayload = jwt.decode(token);
+    console.log(tokenPayload)
 
-    /*
-    const parsedId = JSON.parse(res.locals.userId)
-    const user = await User.findById({ '_id': ObjectId(parsedId) });
-    res.json({ user }); // => {user: user}
-    */
-    res.json('OK')
-    const user = await User.findById(res.locals.user.userId);
-    res.json({ user });
+    const user = await User.findById(tokenPayload.userId);
+    return res.json({ watchlist: user.watchlist })
 });
 
 router.post('/', auth({ block: true }), async (req, res) => {
@@ -25,22 +18,20 @@ router.post('/', auth({ block: true }), async (req, res) => {
 
     const token = req.headers.authorization;
     const tokenPayload = jwt.decode(token);
-    console.log(tokenPayload)
 
     const user = await User.findById(tokenPayload.userId);
-
+    // console.log(user.watchlist)
+    let conflictCheck;
+    user.watchlist.map((series) => { conflictCheck = series.showId });
+    if (payload.showId === conflictCheck) return res.sendStatus(409)
     user.watchlist.push(payload);
     await user.save().catch((err) => res.sendStatus(500).send(err));
-    return res.json({ watchlist: user.watchlist })
-
-
+    return res.status(200).json({ watchlist: user.watchlist })
 });
 
 router.delete('/', async (req, res) => {
 
 })
-
-
 
 
 module.exports = router;

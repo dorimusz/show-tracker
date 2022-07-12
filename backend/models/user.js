@@ -22,12 +22,6 @@ const tvShowSchema = new mongoose.Schema({
     isDeleted: { type: Boolean, default: false } //if deleted from watchlist
 })
 
-
-// const watchlistSchema = new mongoose.Schema({
-//     // title: { type: String, required: true },
-//     seriesList: [tvShowSchema],
-// });
-
 const userSchema = new mongoose.Schema({
     username: { type: String }, //empty string is not accepted + !!!UNIQUE
     providers: {

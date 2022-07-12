@@ -1,8 +1,7 @@
 import React from 'react'
 import http from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import AddToWatchlist from '../components/AddToWatchlist'
-// import EpisodeList from '../components/EpisodeList'
 import Episode from '../components/Episode'
 
 const CompleteShow = () => {
@@ -10,6 +9,7 @@ const CompleteShow = () => {
     const [show, setShow] = useState([]);
     const [image, setImage] = useState('');
     const [episodes, setEpisodes] = useState([]);
+    const [onWatchlist, setOnWatchlist] = useState(false);
 
     const load = async () => {
         const response = await http.get(`https://api.tvmaze.com/shows/${showid}`)
@@ -20,7 +20,7 @@ const CompleteShow = () => {
 
     const loadEp = async () => {
         const responseEps = await http.get(`https://api.tvmaze.com/shows/${showid}/episodes`)
-        console.log(responseEps.data);
+        // console.log(responseEps.data);
         setEpisodes(responseEps.data)
     }
 
@@ -45,9 +45,10 @@ const CompleteShow = () => {
                         {show.runtime ? <p>Runtime: {show.runtime}</p> : <p>Runtime: no info</p>}
                         {show.rating?.average ? <p>Rating: {show.rating.average}</p> : <p>Rating: no info</p>}
 
-
                     </div>
-                    <AddToWatchlist showid={showid} show={show} episodes={episodes} />
+                    {onWatchlist ? <p>Added to your watchlist. To manage your series go to Watchlilst page.</p> : <AddToWatchlist showid={showid} show={show} episodes={episodes} setOnWatchlist={setOnWatchlist} />}
+                    {/* <AddToWatchlist showid={showid} show={show} episodes={episodes} /> */}
+
 
                 </div>
 
