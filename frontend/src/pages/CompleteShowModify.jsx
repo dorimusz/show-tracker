@@ -7,7 +7,13 @@ const Eps = ({ ep, showid }) => {
     const watchEpisode = async () => {
         const { post } = toDoApi();
         const response = await post(`/watchlist/watch`, { showid, id: ep._id })
+        window.location.reload(false)
+    }
 
+    const unWatchEpisode = async () => {
+        const { post } = toDoApi();
+        const response = await post(`/watchlist/unwatch`, { showid, id: ep._id })
+        window.location.reload(false)
     }
 
     return (
@@ -18,7 +24,7 @@ const Eps = ({ ep, showid }) => {
                 {ep.season}
                 {ep.epNumber}
             </div>
-            <button onClick={watchEpisode}>Add to watched</button>
+            {ep.watched ? <button onClick={unWatchEpisode}>Unwatch</button> : <button onClick={watchEpisode}>Add to watched</button>}
         </>
     )
 }
