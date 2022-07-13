@@ -23,14 +23,31 @@ const Profile = () => {
 
     return (
         <>
-            {token ? <h2>Hello <span>{user.username}</span></h2> : <h2>You are not logged in</h2>}
+            {token
+                ?
+                <h2>Hello <span>{user.username}</span></h2>
+                :
+                <h2>You are not logged in</h2>}
 
 
 
             <div>
                 {token ?
                     <div>
-                        "Welcome at your profile page"
+                        <div>
+                            <h3>Your personal information</h3>
+                            <div className="loginInfo">
+                                <h4> Your personal info: </h4>
+                                <p>Login name: {user.username}</p>
+                            </div>
+
+                            {/* <div className="personalInfo">
+                                <h4> Your login info: </h4>
+                                <p>Login name: {user.username}</p>
+                                <p>Login password: <span>At this stage of the app you cannot change your password.</span></p>
+                            </div> */}
+                        </div>
+
 
                     </div>
 
