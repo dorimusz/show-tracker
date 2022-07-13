@@ -31,34 +31,10 @@ router.post('/login', auth({ block: false }), async (req, res) => { //ha nincs h
     if (!response) return res.status(500).send('Token provider error');
     if (response.status !== 200) return res.status(401).send('oid provider error'); //amit a google ad, nem 200-as, akkor nem tudjuk azonosítani
 
-    console.log(response.data)
-    //github oauth flowjahoz
-    let openId;
-    const onlyOauth = !response.data.id_token;
+    const decoded = jwt.decode(response.data.id_token)
+    if (!decoded) return res.sendStatus(500);
+    openId = decoded.sub;
 
-    if (onlyOauth) {
-        // let token = response.data.split("=")[1].split("&")[0];
-        let accesstoken = response.data.access_token;
-        console.log(accesstoken);
-
-        const userResponse = await http.get(config.auth[provider].user_endpoint, {
-            headers: {
-                authorization: "Bearer " + accesstoken,
-            }
-        })
-        if (!response) return res.sendStatus(500);
-        if (response.status !== 200) return res.sendStatus(401);
-
-        clg(response.data)
-
-        const id = config.auth[provider].user_id;
-        openId = userResponse.data[id];
-        // openId = userResponse.data.id;
-    } else {
-        const decoded = jwt.decode(response.data.id_token)
-        if (!decoded) return res.sendStatus(500);
-        openId = decoded.sub;
-    }
 
     // elmentjük a usert a googleId/openid alapján, 
     const key = `providers.${provider}`;
