@@ -11,6 +11,7 @@ const IgnoreShow = ({ show }) => {
         const response = await patch(`/myshows/manage/ignore`, { showid })
         window.location.reload(false)
     }
+
     const unignoreShow = async () => {
         const response = await patch(`/myshows/manage/unignore`, { showid })
         window.location.reload(false)
@@ -24,10 +25,17 @@ const IgnoreShow = ({ show }) => {
 }
 
 const DeleteShow = ({ show }) => {
+    const { del } = toDoApi();
+    const showid = show.showId
+
+    const deleteShow = async () => {
+        const response = await del(`/myshows/manage`, { data: showid })
+        // window.location.reload(false)
+    }
 
     return (
         <>
-            {!show.isDeleted ? <button>Delete from my watchlist</button> : null}
+            {!show.isDeleted ? <button onClick={deleteShow}>Delete from my watchlist</button> : null}
         </>
     )
 
