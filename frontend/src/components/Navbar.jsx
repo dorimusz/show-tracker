@@ -16,10 +16,13 @@ const Navbar = () => {
                 <div>
                     <button onClick={() => nav('/')}>Home</button>
                     <button onClick={() => nav('/search')} > Search</button>
-                    <button onClick={() => nav('/watchlist')} > Watchlist</button>
-                    <button onClick={() => nav('/myshows/manage')} > Manage shows</button>
-                    <button onClick={() => nav('/request')} > Request</button>
-                    {/* <button onClick={() => navigate('/profile')} > Profile</button> */}
+
+                    {token ? <button onClick={() => nav('/watchlist')} > Watchlist</button> : null}
+
+                    {token ? <button onClick={() => nav('/myshows/manage')} > Manage shows</button> : null}
+
+                    {token ? <button onClick={() => nav('/request')} > Request show</button> : null}
+
                     {token ? <Link to="/profile" > Profile</Link> : null}
                 </div>
                 <div>

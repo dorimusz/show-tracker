@@ -2,6 +2,7 @@ import React from 'react'
 import { toDoApi } from '../api/toDoApi';
 import { useState, useEffect } from 'react'
 import { prepareShowBody } from '../helpers/show.helper';
+import { useAuth } from "../providers/auth"
 
 const AddToWatchlist = (props) => {
     const setOnWatchlist = props.setOnWatchlist;
@@ -10,6 +11,7 @@ const AddToWatchlist = (props) => {
     const episodes = props.episodes;
 
     const { post } = toDoApi();
+    const { token } = useAuth();
 
     const addToWatchlist = async () => {
         const response = await post(`/watchlist`, prepareShowBody(showid, show, episodes))
@@ -22,7 +24,10 @@ const AddToWatchlist = (props) => {
     }
 
     return (
-        <button onClick={addToWatchlist}>Add to watchlist</button>
+        <>
+            {token ? <button onClick={addToWatchlist}>Add to watchlist</button> : <p>Want to track show? Log in!</p>}
+        </>
+
     )
 }
 
