@@ -31,6 +31,8 @@ const ManageShows = () => {
                             <p>{show.name}</p>
                             {!show.isIgnored ? <button>Ignore on my watchlist</button> : <button>Show on watchlist</button>}
 
+                            {!show.isDeleted ? <button>Delete from my watchlist</button> : null}
+
                         </div>
 
                     )
