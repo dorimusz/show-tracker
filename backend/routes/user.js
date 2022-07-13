@@ -61,13 +61,8 @@ router.post('/create', auth({ block: true }), async (req, res) => {
 router.get('/', auth({ block: true }), async (req, res) => {
     const token = req.headers.authorization;
     const tokenPayload = jwt.decode(token);
-    // console.log(tokenPayload)
-
-    // console.log("userid: " + tokenPayload.userId)
     const user = await User.findById(tokenPayload.userId);
-    console.log(user)
     return res.json({ user })
 })
-
 
 module.exports = router;

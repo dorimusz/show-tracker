@@ -6,22 +6,22 @@ router.get('/', auth({ block: true }), async (req, res) => {
     let response = await Request.find({})
     console.log(response)
     res.json(response)
-
 })
 
 router.post('/', auth({ block: true }), async (req, res) => {
     // const token = req.headers.authorization;
     const payload = req.body;
     if (!payload) return res.status(400).send('Nice try');
-    if (!payload.title) return res.status(400).send('Title is required');
+    const title = payload.title;
+    if (!title) return res.status(400).send('Title is required');
 
     const request = new Request({
         title: payload.title,
         comment: payload.comment,
     })
-    await request.save().catch((err) => { return res.status(500).json(err) });
-    return res.status(200).json("Thank you for your request, we'll check it soon!");
 
+    await request.save().catch((err) => { return res.status(500).json(err) });
+    return res.status(200).json('Thank you for your request, we\'ll check it soon!');
 });
 
 module.exports = router;

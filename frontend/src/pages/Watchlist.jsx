@@ -15,7 +15,7 @@ const Watchlist = () => {
         setWatchlist(response.data.watchlist)
         // console.log(response.data);
     }
-    // console.log(watchlist);
+    console.log(watchlist);
 
     useEffect(() => {
         getWatchlist()

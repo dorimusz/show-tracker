@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.61% </span>
+                <span class="strong">86.36% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>33/39</span>
+                <span class='fraction'>38/44</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.75% </span>
+                <span class="strong">94.59% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>30/32</span>
+                <span class='fraction'>35/37</span>
             </div>
         
             
@@ -130,15 +130,14 @@
 <a name='L65'></a><a href='#L65'>65</a>
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L68'></a><a href='#L68'>68</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -147,7 +146,6 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -167,7 +165,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -177,20 +174,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -198,15 +190,21 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const router = require('express').Router();
-const http = require('../utils/http'); //ide jön a baseurl, mint pl a tokenendpoint legeleje
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span></td><td class="text"><pre class="prettyprint lang-js">const router = require('express').Router();
+const http = require('../utils/http');
 const jwt = require('jsonwebtoken')
 const User = require('../models/user');
 const auth = require('../middlewares/auth')
 const config = require('../app.config')
 &nbsp;
-router.post('/login', auth({ block: false }), async (req, res) =&gt; { //ha nincs headerje, akkor is be tud jelentkezni
+router.post('/login', auth({ block: false }), async (req, res) =&gt; {
     const payload = req.body;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!payload) <span class="cstat-no" title="statement not covered" >return res.status(400).send('Nice try');</span>
 &nbsp;
@@ -215,7 +213,6 @@ router.post('/login', auth({ block: false }), async (req, res) =&gt; { //ha ninc
     if (!code || !provider) return res.sendStatus(400) //not enough data
     if (!Object.keys(config.auth).includes(provider)) return res.sendStatus(400) //dummy stuff sent
 &nbsp;
-    //be van csomizva a utils/http-be
     const response = await http.post(config.auth[provider].token_endpoint, {
         "code": code,
         "client_id": config.auth[provider].client_id,
@@ -230,12 +227,11 @@ router.post('/login', auth({ block: false }), async (req, res) =&gt; { //ha ninc
         })
 &nbsp;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!response) <span class="cstat-no" title="statement not covered" >return res.status(500).send('Token provider error');</span>
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (response.status !== 200) <span class="cstat-no" title="statement not covered" >return res.status(401).send('oid provider error'); </span>//amit a google ad, nem 200-as, akkor nem tudjuk azonosítani
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (response.status !== 200) <span class="cstat-no" title="statement not covered" >return res.status(401).send('oid provider error');</span>
 &nbsp;
     const decoded = jwt.decode(response.data.id_token)
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!decoded) <span class="cstat-no" title="statement not covered" >return res.sendStatus(500);</span>
     openId = decoded.sub;
-&nbsp;
 &nbsp;
     // elmentjük a usert a googleId/openid alapján, 
     const key = `providers.${provider}`;
@@ -245,20 +241,15 @@ router.post('/login', auth({ block: false }), async (req, res) =&gt; { //ha ninc
 &nbsp;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (user &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >res.locals.user?.providers)</span> {
 <span class="cstat-no" title="statement not covered" >        user.providers = { ...user.providers, ...res.locals.user.providers };</span>
-&nbsp;
 <span class="cstat-no" title="statement not covered" >        user = await user.save();</span>
     }
 &nbsp;
+    const sessionToken = jwt.sign({ "userId": user?._id, "providers": user ? <span class="branch-0 cbranch-no" title="branch not covered" >user.providers </span>: { [provider]: openId } }, process.env.JWT_SECRET, { expiresIn: "1h" });
 &nbsp;
-    //optional chaining user?. = user ? user._id : null
-    const sessionToken = jwt.sign({ "userId": user?._id, "providers": user ? <span class="branch-0 cbranch-no" title="branch not covered" >user.providers </span>: { [provider]: openId } }, process.env.JWT_SECRET, { expiresIn: "1h" }); //ezt az id-t a mongoDB adta nekik, secret key, expires in
-&nbsp;
-    res.json({ sessionToken }) //visszaküldjük neki stringként(sessionToken), de küldhetjük objectben is ({sessionToken})/{"sessionToken": sessionToken}
+    res.json({ sessionToken })
 });
 &nbsp;
-//user létrehozása
 router.post('/create', auth({ block: true }), async (req, res) =&gt; {
-    // res.locals.user elérhető itt
     if (!req.body?.username) return res.sendStatus(400);
     const user = await User.create({ username: req.body.username, providers: res.locals.user.providers });
 &nbsp;
@@ -266,6 +257,12 @@ router.post('/create', auth({ block: true }), async (req, res) =&gt; {
     res.json({ sessionToken });
 });
 &nbsp;
+router.get('/', auth({ block: true }), async (req, res) =&gt; {
+    const token = req.headers.authorization;
+    const tokenPayload = jwt.decode(token);
+    const user = await User.findById(tokenPayload.userId);
+    return res.json({ user })
+})
 &nbsp;
 module.exports = router;</pre></td></tr></table></pre>
 
@@ -274,7 +271,7 @@ module.exports = router;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Jul 13 2022 13:06:19 GMT+0200 (közép-európai nyári idő)
+                at Wed Jul 13 2022 21:53:57 GMT+0200 (közép-európai nyári idő)
             </div>
         <script src="../../prettify.js"></script>
         <script>
