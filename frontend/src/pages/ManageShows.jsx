@@ -3,6 +3,37 @@ import { useState, useEffect } from 'react'
 import { toDoApi } from '../api/toDoApi';
 import { useAuth } from "../providers/auth";
 
+const IgnoreShow = ({ show }) => {
+    const { patch } = toDoApi();
+    const showid = show.showId
+
+    const ignoreShow = async () => {
+        const response = await patch(`/myshows/manage/ignore`, { showid })
+        window.location.reload(false)
+    }
+    const unignoreShow = async () => {
+        const response = await patch(`/myshows/manage/unignore`, { showid })
+        window.location.reload(false)
+    }
+
+    return (
+        <>
+            {!show.isIgnored ? <button onClick={ignoreShow}>Ignore on my watchlist</button> : <button onClick={unignoreShow}>Show on watchlist</button>}
+        </>
+    )
+}
+
+const DeleteShow = ({ show }) => {
+
+    return (
+        <>
+            {!show.isDeleted ? <button>Delete from my watchlist</button> : null}
+        </>
+    )
+
+}
+
+
 const ManageShows = () => {
     const { get } = toDoApi();
     const { token } = useAuth()
@@ -28,11 +59,11 @@ const ManageShows = () => {
                         <div className='watchlistContainer'>
                             {watchlist ? watchlist.map((show, i) =>
 
-                                <div>
+                                <div key={i}>
                                     <p>{show.name}</p>
-                                    {!show.isIgnored ? <button>Ignore on my watchlist</button> : <button>Show on watchlist</button>}
+                                    <IgnoreShow show={show} key={show.name} />
+                                    <DeleteShow show={show} key={show.name + show.id} />
 
-                                    {!show.isDeleted ? <button>Delete from my watchlist</button> : null}
 
                                 </div>
 

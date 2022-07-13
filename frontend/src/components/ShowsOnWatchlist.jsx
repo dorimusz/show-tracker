@@ -13,7 +13,7 @@ const ShowsOnWatchlist = (show) => {
 
     return (
         <div>
-            {!fullShow.isIgnored || !fullShow.isDeleted ?
+            {!fullShow.isIgnored ?
                 <div>
                     {fullShow.name}
                     {fullShow.image ? <img src={fullShow.image} alt={fullShow.name} /> : null}
