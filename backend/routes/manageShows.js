@@ -14,5 +14,10 @@ router.get('/manage', auth({ block: true }), async (req, res) => {
     return res.json({ watchlist: user.watchlist })
 });
 
+// /manage/ignore - PATCH & DELETE
+
+
+// /manage - DELETE
+
 
 module.exports = router;

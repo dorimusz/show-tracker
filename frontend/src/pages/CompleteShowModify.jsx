@@ -6,8 +6,8 @@ import { toDoApi } from '../api/toDoApi';
 
 const Eps = ({ ep, showid }) => {
     const watchEpisode = async () => {
-        const { post } = toDoApi();
-        const response = await post(`/watchlist/watch`, { showid, id: ep._id })
+        const { patch } = toDoApi();
+        const response = await patch(`/watchlist`, { showid, id: ep._id })
         window.location.reload(false)
     }
 

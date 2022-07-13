@@ -46,7 +46,7 @@ router.post('/', auth({ block: true }), async (req, res) => {
 });
 
 //needs to be patch, not post
-router.post('/watch', auth({ block: true }), async (req, res) => {
+router.patch('/', auth({ block: true }), async (req, res) => {
     const payload = req.body;
     if (!payload) return res.status(400).send('Nice try');
 
@@ -59,6 +59,19 @@ router.post('/watch', auth({ block: true }), async (req, res) => {
     await user.save().catch((err) => res.sendStatus(500).send(err));
     return res.status(200).json({ watchlist: user.watchlist })
 });
+// router.post('/watch', auth({ block: true }), async (req, res) => {
+//     const payload = req.body;
+//     if (!payload) return res.status(400).send('Nice try');
+
+//     const token = req.headers.authorization;
+//     const tokenPayload = jwt.decode(token);
+
+//     const user = await User.findById(tokenPayload.userId);
+//     user.watchlist = user.watchlist.map((watchlist) => watchlist.showId === payload.showid ? parseWatchlist(watchlist, payload.id) : watchlist)
+
+//     await user.save().catch((err) => res.sendStatus(500).send(err));
+//     return res.status(200).json({ watchlist: user.watchlist })
+// });
 
 router.delete('/', auth({ block: true }), async (req, res) => {
     console.log(req.body.data)

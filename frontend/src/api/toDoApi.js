@@ -22,6 +22,21 @@ export const toDoApi = () => {
         }
     }
 
+    const patch = async (path, data) => {
+        try {
+            const response = await instance.patch(path, data, {
+                headers: {
+                    "authorization": localStorage.getItem("token")
+                }
+            })
+            // console.log("RESPONSE DATA:", response.data);
+            return response
+        } catch (error) {
+            console.log('(post) error  data: ' + error.response.data);
+            return error.response
+        }
+    }
+
     const del = async (path, data) => {
         try {
             const response = await instance.delete(path, {
@@ -52,7 +67,7 @@ export const toDoApi = () => {
             return error.response;
         }
     }
-    return { post, get, del, _instance: instance }
+    return { post, get, del, patch, _instance: instance }
 
 }
 
