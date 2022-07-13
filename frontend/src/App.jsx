@@ -12,6 +12,7 @@ import CompleteShow from './pages/CompleteShow';
 import Watchlist from './pages/Watchlist';
 import CompleteShowModify from './pages/CompleteShowModify';
 import RequestShow from './pages/RequestShow';
+import ManageShows from './pages/ManageShows';
 // import Sidebar from './components/Sidebar';
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
         <Route path="/search" element={<SearchShows />} />
         <Route path="/show/:id/episodes" element={<CompleteShow />} />
         <Route path="/watchlist/show/:id" element={<CompleteShowModify />} />
+        <Route path="/myshows/manage" element={<ManageShows />} />
+
 
         <Route path="/request" element={<RequestShow />} />
 

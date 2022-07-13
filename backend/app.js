@@ -20,6 +20,8 @@ const userRoutes = require('./routes/user');
 app.use('/api/user', userRoutes)
 const watchlistRoutes = require('./routes/watchlist');
 app.use('/api/watchlist', watchlistRoutes)
+const manageShowsRoutes = require('./routes/manageShows');
+app.use('/api/myshows', manageShowsRoutes)
 const requestRoutes = require('./routes/request');
 app.use('/api/request', requestRoutes)
 

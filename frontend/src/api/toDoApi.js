@@ -22,6 +22,22 @@ export const toDoApi = () => {
         }
     }
 
+    const del = async (path, data) => {
+        try {
+            const response = await instance.delete(path, {
+                data,
+                headers: {
+                    "authorization": localStorage.getItem("token")
+                }
+            })
+            // console.log("RESPONSE DATA:", response.data);
+            return response
+        } catch (error) {
+            console.log('(post) error  data: ' + error.response.data);
+            return error.response
+        }
+    }
+
     const get = async (path) => {
         try {
             const response = await instance.get(path, {
@@ -36,7 +52,7 @@ export const toDoApi = () => {
             return error.response;
         }
     }
-    return { post, get, _instance: instance }
+    return { post, get, del, _instance: instance }
 
 }
 

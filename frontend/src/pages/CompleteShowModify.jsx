@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useAuth } from "../providers/auth";
 import { toDoApi } from '../api/toDoApi';
@@ -11,8 +12,8 @@ const Eps = ({ ep, showid }) => {
     }
 
     const unWatchEpisode = async () => {
-        const { post } = toDoApi();
-        const response = await post(`/watchlist/unwatch`, { showid, id: ep._id })
+        const { del } = toDoApi();
+        const response = await del(`/watchlist`, { data: { showid, id: ep._id } })
         window.location.reload(false)
     }
 
