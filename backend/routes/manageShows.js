@@ -66,7 +66,7 @@ const unignoreShow = (watchlist) => {
 }
 
 const deleteShow = (watchlist) => {
-    return { ...watchlist, isDeleted: true, showId: "###" }
+    return { ...watchlist, isDeleted: true, isIgnored: true, showId: "###" }
 }
 
 module.exports = router;

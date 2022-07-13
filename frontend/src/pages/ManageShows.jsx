@@ -68,9 +68,14 @@ const ManageShows = () => {
                             {watchlist ? watchlist.map((show, i) =>
 
                                 <div key={i}>
-                                    <p>{show.name}</p>
-                                    <IgnoreShow show={show} key={show.name} />
-                                    <DeleteShow show={show} key={show.name + show.id} />
+                                    {show.isDeleted ? null :
+                                        <div>
+                                            <p>{show.name}</p>
+                                            <IgnoreShow show={show} key={show.name} />
+                                            <DeleteShow show={show} key={show.name + show.id} />
+                                        </div>
+                                    }
+
 
 
                                 </div>
