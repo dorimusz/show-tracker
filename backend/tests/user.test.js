@@ -94,22 +94,6 @@ describe('/api/user/login POST tests', () => {
         const users = await User.find();
         expect(users).toStrictEqual([]);
     });
-
-    test('should return 200 with JWT with valid provider (user not created))', async () => {
-        //given
-        const code = "random";
-        const provider = "github";
-
-        // when
-        const response = await client.post('/api/user/login').send({ code, provider });
-
-        // then
-        expect(response.status).toBe(200);
-        const responseToken = jwt.decode(response.body.sessionToken);
-
-        const users = await User.find();
-        expect(users).toStrictEqual([]);
-    });
 });
 
 

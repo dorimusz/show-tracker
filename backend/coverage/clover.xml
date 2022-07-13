@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1657707579728" clover="3.2.0">
-  <project timestamp="1657707579729" name="All files">
-    <metrics statements="259" coveredstatements="151" conditionals="74" coveredconditionals="29" methods="48" coveredmethods="12" elements="381" coveredelements="192" complexity="0" loc="259" ncloc="259" packages="6" files="15" classes="15"/>
+<coverage generated="1657710379724" clover="3.2.0">
+  <project timestamp="1657710379724" name="All files">
+    <metrics statements="248" coveredstatements="145" conditionals="68" coveredconditionals="27" methods="48" coveredmethods="12" elements="364" coveredelements="184" complexity="0" loc="248" ncloc="248" packages="6" files="15" classes="15"/>
     <package name="backend">
       <metrics statements="23" coveredstatements="23" conditionals="10" coveredconditionals="8" methods="0" coveredmethods="0"/>
       <file name="app.config.js" path="C:\Users\Dorcsi\Desktop\Codecool\FS Projects\fapi-exam-project-2-general-dorimusz\backend\app.config.js">
@@ -40,11 +40,11 @@
         <metrics statements="8" coveredstatements="8" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="4" count="10" type="stmt"/>
-        <line num="5" count="10" type="stmt"/>
-        <line num="6" count="10" type="cond" truecount="4" falsecount="0"/>
-        <line num="7" count="9" type="stmt"/>
-        <line num="8" count="9" type="stmt"/>
+        <line num="4" count="9" type="stmt"/>
+        <line num="5" count="9" type="stmt"/>
+        <line num="6" count="9" type="cond" truecount="4" falsecount="0"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
       </file>
       <file name="errorHandler.js" path="C:\Users\Dorcsi\Desktop\Codecool\FS Projects\fapi-exam-project-2-general-dorimusz\backend\middlewares\errorHandler.js">
@@ -82,7 +82,7 @@
       </file>
     </package>
     <package name="backend.routes">
-      <metrics statements="160" coveredstatements="63" conditionals="60" coveredconditionals="17" methods="34" coveredmethods="2"/>
+      <metrics statements="149" coveredstatements="60" conditionals="54" coveredconditionals="15" methods="34" coveredmethods="2"/>
       <file name="manageShows.js" path="C:\Users\Dorcsi\Desktop\Codecool\FS Projects\fapi-exam-project-2-general-dorimusz\backend\routes\manageShows.js">
         <metrics statements="46" coveredstatements="12" conditionals="12" coveredconditionals="0" methods="13" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -151,7 +151,7 @@
         <line num="27" count="1" type="stmt"/>
       </file>
       <file name="user.js" path="C:\Users\Dorcsi\Desktop\Codecool\FS Projects\fapi-exam-project-2-general-dorimusz\backend\routes\user.js">
-        <metrics statements="43" coveredstatements="33" conditionals="28" coveredconditionals="17" methods="2" coveredmethods="2"/>
+        <metrics statements="32" coveredstatements="30" conditionals="22" coveredconditionals="15" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -159,42 +159,31 @@
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="9" count="6" type="stmt"/>
-        <line num="10" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="12" count="6" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="14" count="6" type="cond" truecount="4" falsecount="0"/>
-        <line num="15" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="31" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="32" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="10" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="14" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="15" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="31" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="32" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="34" count="1" type="stmt"/>
-        <line num="37" count="1" type="stmt"/>
-        <line num="39" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="49" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="50" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="58" count="1" type="stmt"/>
-        <line num="59" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="60" count="1" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="69" count="1" type="cond" truecount="2" falsecount="2"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="72" count="0" type="stmt"/>
-        <line num="77" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="79" count="1" type="stmt"/>
-        <line num="83" count="1" type="stmt"/>
-        <line num="85" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="86" count="2" type="stmt"/>
-        <line num="88" count="2" type="stmt"/>
-        <line num="89" count="2" type="stmt"/>
-        <line num="93" count="1" type="stmt"/>
+        <line num="35" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="45" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="53" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="61" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="64" count="2" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
       </file>
       <file name="watchlist.js" path="C:\Users\Dorcsi\Desktop\Codecool\FS Projects\fapi-exam-project-2-general-dorimusz\backend\routes\watchlist.js">
         <metrics statements="56" coveredstatements="12" conditionals="16" coveredconditionals="0" methods="16" coveredmethods="0"/>
@@ -284,26 +273,26 @@
         <line num="14" count="2" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
-        <line num="22" count="10" type="stmt"/>
-        <line num="23" count="10" type="stmt"/>
+        <line num="22" count="9" type="stmt"/>
+        <line num="23" count="9" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
       </file>
     </package>
     <package name="backend.utils">
-      <metrics statements="26" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+      <metrics statements="26" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
       <file name="http.js" path="C:\Users\Dorcsi\Desktop\Codecool\FS Projects\fapi-exam-project-2-general-dorimusz\backend\utils\http.js">
-        <metrics statements="20" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+        <metrics statements="20" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
