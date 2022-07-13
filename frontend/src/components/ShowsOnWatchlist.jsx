@@ -13,13 +13,25 @@ const ShowsOnWatchlist = (show) => {
 
     return (
         <div>
+            {!fullShow.isIgnored || !fullShow.isDeleted ?
+                <div>
+                    {fullShow.name}
+                    {fullShow.image ? <img src={fullShow.image} alt={fullShow.name} /> : null}
+                    <div className='buttonHolder'>
+                        <button onClick={takeToShowPage}>Edit watched episodes</button>
+                    </div>
+                </div>
+                :
+                null
+            }
+
+            {/* 
             {fullShow.name}
             {fullShow.image ? <img src={fullShow.image} alt={fullShow.name} /> : null}
             <div className='buttonHolder'>
                 <button onClick={takeToShowPage}>Edit watched episodes</button>
-            </div>
+            </div> */}
 
-            {/* {episodes.map((ep, i) => <RenderEpisode key={i} ep={ep} />)} */}
         </div>
     )
 }

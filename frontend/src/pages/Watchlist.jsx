@@ -30,7 +30,7 @@ const Watchlist = () => {
                 <div className='watchlistContainer'>
                     {watchlist ? watchlist.map((show, i) => <ShowsOnWatchlist key={i} show={show} />) : "No shows and eps to show"}
                 </div>
-            </div> : "Anonymus user"}</div>
+            </div> : "Please log in!"}</div>
         </>
 
     )
