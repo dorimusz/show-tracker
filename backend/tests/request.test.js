@@ -73,7 +73,7 @@ describe('/api/request POST tests', () => {
 
         // then
         expect(response.status).toBe(400);
-        expect(response.error.text).toBe("Title is required");
+        expect(response.error.text).toBe("Nice try");
     });
 
     test('Should return 400 when request body sent (with comment, but) without title.', async () => {

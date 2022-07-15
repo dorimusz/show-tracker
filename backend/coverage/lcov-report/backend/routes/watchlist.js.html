@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.46% </span>
+                <span class="strong">73.84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/65</span>
+                <span class='fraction'>48/65</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">43.75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>7/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">18.75% </span>
+                <span class="strong">43.75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/16</span>
+                <span class='fraction'>7/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">44.44% </span>
+                <span class="strong">77.77% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>24/54</span>
+                <span class='fraction'>42/54</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -145,7 +145,9 @@
 <a name='L80'></a><a href='#L80'>80</a>
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -171,33 +173,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -252,34 +256,36 @@ router.get('/show/:showid', auth({ block: true }), async (req, res) =&gt; {
     return res.json(filteredWatchlist[0])
 });
 &nbsp;
-router.post('/', auth({ block: true }), <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-    const payload = <span class="cstat-no" title="statement not covered" >req.body;</span>
-<span class="cstat-no" title="statement not covered" >    if (!payload) <span class="cstat-no" title="statement not covered" >return res.status(400).send('Nice try');</span></span>
+router.post('/', auth({ block: true }), async (req, res) =&gt; {
+    // if (!payload) return res.status(400).send('Nice try');
+    if (Object.keys(req.body).length === 0) return res.status(400).send('Nice try');
+    const payload = req.body;
 &nbsp;
-    const token = <span class="cstat-no" title="statement not covered" >req.headers.authorization;</span>
-    const tokenPayload = <span class="cstat-no" title="statement not covered" >jwt.decode(token);</span>
+    const token = req.headers.authorization;
+    const tokenPayload = jwt.decode(token);
 &nbsp;
-    const user = <span class="cstat-no" title="statement not covered" >await User.findById(tokenPayload.userId);</span>
+    const user = await User.findById(tokenPayload.userId);
     let conflictCheck;
-<span class="cstat-no" title="statement not covered" >    user.watchlist.map(<span class="fstat-no" title="function not covered" >(s</span>eries) =&gt; { <span class="cstat-no" title="statement not covered" >conflictCheck = series.showId </span>});</span>
-<span class="cstat-no" title="statement not covered" >    if (payload.showId === conflictCheck) <span class="cstat-no" title="statement not covered" >return res.sendStatus(409)</span></span>
-<span class="cstat-no" title="statement not covered" >    user.watchlist.push(payload);</span>
-<span class="cstat-no" title="statement not covered" >    await user.save().catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; <span class="cstat-no" title="statement not covered" >res.sendStatus(500).send(err))</span>;</span>
-<span class="cstat-no" title="statement not covered" >    return res.status(200).json({ watchlist: user.watchlist })</span>
+    user.watchlist.map((series) =&gt; { conflictCheck = series.showId });
+    if (payload.showId === conflictCheck) return res.sendStatus(409)
+    user.watchlist.push(payload);
+    await user.save().catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; <span class="cstat-no" title="statement not covered" >res.sendStatus(500).send(err))</span>;
+    return res.status(200).json({ watchlist: user.watchlist })
 });
 &nbsp;
-router.patch('/', auth({ block: true }), <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-    const payload = <span class="cstat-no" title="statement not covered" >req.body;</span>
-<span class="cstat-no" title="statement not covered" >    if (!payload) <span class="cstat-no" title="statement not covered" >return res.status(400).send('Nice try');</span></span>
+router.patch('/', auth({ block: true }), async (req, res) =&gt; {
+    const payload = req.body;
+    if (Object.keys(req.body).length === 0) return res.status(400).send('Nice try');
+    // if (!payload) return res.status(400).send('Nice try');
 &nbsp;
-    const token = <span class="cstat-no" title="statement not covered" >req.headers.authorization;</span>
-    const tokenPayload = <span class="cstat-no" title="statement not covered" >jwt.decode(token);</span>
+    const token = req.headers.authorization;
+    const tokenPayload = jwt.decode(token);
 &nbsp;
-    const user = <span class="cstat-no" title="statement not covered" >await User.findById(tokenPayload.userId);</span>
-<span class="cstat-no" title="statement not covered" >    user.watchlist = user.watchlist.map(<span class="fstat-no" title="function not covered" >(w</span>atchlist) =&gt; <span class="cstat-no" title="statement not covered" >watchlist.showId === payload.showid ? parseWatchlist(watchlist, payload.id) : watchlist)</span></span>
+    const user = await User.findById(tokenPayload.userId);
+    user.watchlist = user.watchlist.map((watchlist) =&gt; watchlist.showId === payload.showid ? <span class="branch-0 cbranch-no" title="branch not covered" >parseWatchlist(watchlist, payload.id) </span>: watchlist)
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    await user.save().catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; <span class="cstat-no" title="statement not covered" >res.sendStatus(500).send(err))</span>;</span>
-<span class="cstat-no" title="statement not covered" >    return res.status(200).json({ watchlist: user.watchlist })</span>
+    await user.save().catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; <span class="cstat-no" title="statement not covered" >res.sendStatus(500).send(err))</span>;
+    return res.status(200).json({ watchlist: user.watchlist })
 });
 &nbsp;
 router.delete('/', auth({ block: true }), <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
@@ -316,7 +322,7 @@ module.exports = router;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Jul 13 2022 21:53:57 GMT+0200 (közép-európai nyári idő)
+                at Fri Jul 15 2022 16:17:02 GMT+0200 (közép-európai nyári idő)
             </div>
         <script src="../../prettify.js"></script>
         <script>

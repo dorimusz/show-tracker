@@ -24,8 +24,9 @@ router.get('/show/:showid', auth({ block: true }), async (req, res) => {
 });
 
 router.post('/', auth({ block: true }), async (req, res) => {
+    // if (!payload) return res.status(400).send('Nice try');
+    if (Object.keys(req.body).length === 0) return res.status(400).send('Nice try');
     const payload = req.body;
-    if (!payload) return res.status(400).send('Nice try');
 
     const token = req.headers.authorization;
     const tokenPayload = jwt.decode(token);
@@ -41,7 +42,8 @@ router.post('/', auth({ block: true }), async (req, res) => {
 
 router.patch('/', auth({ block: true }), async (req, res) => {
     const payload = req.body;
-    if (!payload) return res.status(400).send('Nice try');
+    if (Object.keys(req.body).length === 0) return res.status(400).send('Nice try');
+    // if (!payload) return res.status(400).send('Nice try');
 
     const token = req.headers.authorization;
     const tokenPayload = jwt.decode(token);
