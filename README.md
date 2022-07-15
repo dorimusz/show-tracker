@@ -1,22 +1,25 @@
 # Full Stack API Exam Project: Series Tracker Site
 
+The repository contains the front and server code for a TV show episode tracker application I created as a CodeCool exam project.
+
 ## Summary of the project:
-The project's goal is to make it possible for registered users to organize and keep track of their TV shows and series in an administrative system. The following functions are implemented:
-    - Register and login third-party accounts (Google, my openid which is also included in this repository, however not part of the project)
-    - Personalized user profile.
-    - Browsing unlimited series by title. Needed a reliable APIs to fetch and load the list of series: https://www.tvmaze.com/ Browsing is available to anonymous/not logged in users as well
-    - Opening and showing series' details, aired and upcoming episodes.
-    - Requests to adding new shows, previous requests can be viewed.
-    - Logged in user can add series to the private watchlist (not visible for other users).
-    - The user can track the seen episodes connected to a series (show progress).
+The project's goal is to make it possible for registered users to organize and keep track of their TV shows and series in an administrative system. The following functions are implemented: \
+    - Register and login third-party accounts (Google, my openid which is also included in this repository, however not part of the project) \
+    - Personalized user profile. \
+    - Browsing unlimited series by title. Needed a reliable APIs to fetch and load the list of series: https://www.tvmaze.com/  \
+    - Browsing is available to anonymous/not logged in users as well.  \
+    - Opening and showing series' details, aired and upcoming episodes.  \
+    - Requests to adding new shows, previous requests can be viewed.  \
+    - Logged in user can add series to the private watchlist (not visible for other users).  \
+    - The user can track the seen episodes connected to a series (show progress).  \
 
 ## Main technologies used:
 React (JavaScript ES6, react-router, Hooks) \
 Node.js (express.js) \
 MongoDB (mongoose) \
 Axios (HTTP client) \
-Jest (w mongodb-memory-server, supertest & mocked data) \
-Swagger \
+Jest (mongodb-memory-server, supertest, mocked data) \
+Swagger 
 
 ## User personas: 
 1. User story #1: User1 is a casual TV show watcher. Fancies series since +15 years, however is bad at keeping track of the episodes. Sometimes skips more than one season or just stops at the middle of it for years. Later cannot know where to pick it up, what episode is the next one.
@@ -27,7 +30,7 @@ Swagger \
 https://www.figma.com/file/GxlmaqZrrNTeK2ZhSQSAmR/Track-My-Series?node-id=0%3A1
 
 ## Swagger documentation:
-
+...
 
 ## Starting the application
 ### Start the program with Visual Studio Code or any other IDE
