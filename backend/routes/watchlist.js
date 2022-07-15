@@ -7,7 +7,6 @@ router.get('/', auth({ block: true }), async (req, res) => {
     const token = req.headers.authorization;
     const tokenPayload = jwt.decode(token);
     const user = await User.findById(tokenPayload.userId);
-    console.log(user.watchlist)
 
     return res.json({ watchlist: user.watchlist })
 });

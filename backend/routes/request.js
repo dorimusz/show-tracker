@@ -4,7 +4,6 @@ const Request = require('../models/request')
 
 router.get('/', auth({ block: true }), async (req, res) => {
     let response = await Request.find({})
-    console.log(response)
     res.json(response)
 })
 

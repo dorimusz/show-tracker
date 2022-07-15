@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken");
 
 describe('/api/watchlist GET tests', () => {
     let connection;
-    let mongod;
     let client;
 
     beforeAll(async () => {
@@ -88,7 +87,6 @@ describe('/api/watchlist GET tests', () => {
 
 describe('/api/watchlist POST tests', () => {
     let connection;
-    let mongod;
     let client;
 
     beforeAll(async () => {
@@ -144,7 +142,6 @@ describe('/api/watchlist POST tests', () => {
 
         // when
         const response = await client.post('/api/watchlist');
-        console.log(response)
 
         // then
         expect(response.status).toBe(400);
@@ -257,7 +254,6 @@ describe('/api/watchlist POST tests', () => {
 
 describe('/api/watchlist PATCH tests', () => {
     let connection;
-    let mongod;
     let client;
 
     beforeAll(async () => {
@@ -313,7 +309,6 @@ describe('/api/watchlist PATCH tests', () => {
 
         // when
         const response = await client.patch('/api/watchlist');
-        console.log(response)
 
         // then
         expect(response.status).toBe(400);
@@ -367,3 +362,66 @@ describe('/api/watchlist PATCH tests', () => {
     });
 });
 
+describe('/api/watchlist DELETE tests', () => {
+    let connection;
+    let client;
+
+    beforeAll(async () => {
+        const result = await startDB();
+        server = result[0]
+        connection = result[1]
+        client = mockserver.agent(app);
+    })
+
+    afterEach(async () => {
+        await deleteAll(User)
+    })
+
+    afterAll(() => {
+        stopDB(server, connection)
+    })
+
+    test('Should return 400 when delete request sent without data in body.', async () => {
+        //given
+        const newUser = new User({
+            username: 'Fuego', providers: { oid: '12345' }, watchlist: [
+                {
+                    genres: ['Comedy'],
+                    image: "https://static.tvmaze.com/uploads/images/medium_portrait/170/426349.jpg",
+                    isDeleted: false,
+                    isIgnored: false,
+                    name: "The Foundation",
+                    network: "SHOWTIME Showcase",
+                    runtime: "25",
+                    seasons: [],
+                    showId: "39012",
+                    status: "Ended",
+                    _id: "62ce7e09ee948802ca724b05",
+                },
+                {
+                    genres: ['Drama', 'Action'],
+                    image: "https://static.tvmaze.com/uploads/images/medium_portrait/63/157986.jpg",
+                    isDeleted: true,
+                    isIgnored: false,
+                    name: "Arrow: Blood Rush",
+                    network: "The CW",
+                    runtime: "1",
+                    seasons: [],
+                    showId: "123",
+                    status: "Ended",
+                    _id: "62ced8a4662f84758b1a46cc",
+                }
+            ]
+        });
+        await newUser.save();
+        const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET)
+        client.set('authorization', token);
+
+        // when
+        const response = await client.delete('/api/watchlist');
+
+        // then
+        expect(response.status).toBe(400);
+        expect(response.error.text).toBe("Nice try");
+    });
+});

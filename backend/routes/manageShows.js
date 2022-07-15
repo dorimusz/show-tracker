@@ -6,18 +6,16 @@ const jwt = require('jsonwebtoken')
 router.get('/manage', auth({ block: true }), async (req, res) => {
     const token = req.headers.authorization;
     const tokenPayload = jwt.decode(token);
-    console.log(tokenPayload)
 
-    console.log("userid: " + tokenPayload.userId)
     const user = await User.findById(tokenPayload.userId);
 
     return res.json({ watchlist: user.watchlist })
 });
 
 router.patch('/manage/ignore', auth({ block: true }), async (req, res) => {
+    if (Object.keys(req.body).length === 0) return res.status(400).send('Nice try');
     const payload = req.body;
-    console.log(payload)
-    if (!payload) return res.status(400).send('Nice try');
+    // if (!payload) return res.status(400).send('Nice try');
 
     const token = req.headers.authorization;
     const tokenPayload = jwt.decode(token);
@@ -30,7 +28,7 @@ router.patch('/manage/ignore', auth({ block: true }), async (req, res) => {
 });
 
 router.patch('/manage/unignore', auth({ block: true }), async (req, res) => {
-    const payload = req.body;
+    if (Object.keys(req.body).length === 0) return res.status(400).send('Nice try'); const payload = req.body;
     if (!payload) return res.status(400).send('Nice try');
 
     const token = req.headers.authorization;
