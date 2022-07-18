@@ -23,15 +23,15 @@ const Watchlist = () => {
 
 
     return (
-        <>
-            <div>{token ? <div>
+        <div className='pageContainer'>
+            {token ? <div>
                 <h2>My watchlist</h2>
 
                 <div className='watchlistContainer'>
                     {watchlist ? watchlist.map((show, i) => <ShowsOnWatchlist key={i} show={show} />) : "No shows and eps to show"}
                 </div>
             </div> : "Please log in!"}</div>
-        </>
+
 
     )
 }

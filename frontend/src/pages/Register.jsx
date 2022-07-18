@@ -13,7 +13,7 @@ const Register = () => {
     }, [user])
 
     return (
-        <>
+        <div className='pageContainer'>
             <div>
                 <h2>Add username to reg in</h2>
                 <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -22,7 +22,7 @@ const Register = () => {
             <h3>OR</h3>
             <button onClick={() => auth('google')}>Google</button>
             <button onClick={() => auth('oid')}>Email</button>
-        </>
+        </div>
     )
 }
 

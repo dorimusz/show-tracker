@@ -22,7 +22,7 @@ const Profile = () => {
 
 
     return (
-        <>
+        <div className='pageContainer'>
             {token
                 ?
                 <h2>Hello <span>{user.username}</span></h2>
@@ -54,7 +54,7 @@ const Profile = () => {
                     :
                     "Anonymus user, please log in to proceed"}
             </div>
-        </>
+        </div>
     )
 }
 

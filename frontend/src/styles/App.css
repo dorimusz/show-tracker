@@ -1,0 +1,9 @@
+.pageContainer {
+    position: relative;
+    right: 0;
+    margin-left: 250px;
+    width: auto;
+    padding-left: 20px;
+    overflow: auto;
+    z-index: 1;
+}

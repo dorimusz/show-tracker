@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import http from 'axios'
 import SearchShow from '../components/SearchShow';
 import '../styles/showcard.css'
+import '../styles/Search.css'
 
 const SearchShows = () => {
     const [searchKeyword, setSearchKeyword] = useState("");
@@ -23,7 +24,7 @@ const SearchShows = () => {
     }
 
     return (
-        <>
+        <div className='pageContainer'>
             <h2>Search shows</h2>
             <p className="textP">Start typing a keyword a movie title into the field. In case you don't have any idea, just pick one from the most popular ones:</p>
             <form className="searchbar">
@@ -50,7 +51,7 @@ const SearchShows = () => {
 
             </div>
 
-        </>
+        </div>
     )
 }
 

@@ -58,7 +58,7 @@ const ManageShows = () => {
         getWatchlist()
     }, [])
     return (
-        <>
+        <div className='pageContainer'>
             <h2>Manage My Shows</h2>
             <div>
                 {token
@@ -86,7 +86,7 @@ const ManageShows = () => {
                     </div>
                     : "Please log in!"}
             </div>
-        </>
+        </div>
     )
 }
 
