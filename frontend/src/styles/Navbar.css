@@ -1,0 +1,122 @@
+.navbarUser {
+    background-color: #E8C4CC;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 15%;
+    width: 250px;
+    height: 100%;
+
+    border-bottom-right-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    border: #E8C4CC;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    align-items: center;
+
+}
+
+.navControls,
+.navWatchlist,
+.trackSeries,
+.profileSettings {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.navWatchlist {
+    margin: 5rem 0;
+    width: 100%;
+    align-items: center;
+}
+
+.navWatchlist button {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    padding: 0.7rem 1.2rem;
+}
+
+.navWatchlist button:hover {
+    font-weight: 600;
+}
+
+button {
+    border-radius: 7px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 1em;
+}
+
+button:hover {
+    opacity: 0.9;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    text-transform: uppercase;
+}
+
+.watchlistButton {
+    background-color: #843345;
+}
+
+.navControls {
+    padding: 15px;
+    color: #843345;
+    font-weight: 500;
+    border-top: #843345 1px solid;
+    align-items: center;
+    justify-content: center;
+}
+
+.headingHolder {
+    justify-content: left;
+    padding: 10px 0;
+    color: #843345
+}
+
+.trackSeries button,
+.profileSettings button {
+    color: #F9F0F2;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #BA4F66;
+}
+
+button.logout {
+    box-shadow: none;
+    background-color: #E8C4CC;
+}
+
+.logout:hover {
+    color: #843345;
+    font-weight: 500;
+    background-color: #f7d5dcb7;
+}
+
+/* NAVBAR LOGGED OUT */
+
+.navbar {
+    background-color: #E8C4CC;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar button {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin: 0 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.navbar button:hover {
+    opacity: 0.9;
+    background-color: #843345;
+}
+
+button.login {
+    background-color: #BA4F66;
+}
