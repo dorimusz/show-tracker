@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { toDoApi } from '../api/toDoApi';
 import { prepareRequestBody } from '../helpers/request.helper';
 
+
 const RequestShow = () => {
   const [title, setTitle] = useState('')
   const [comment, setComment] = useState('')
@@ -25,13 +26,15 @@ const RequestShow = () => {
 
   return (
 
-    <div className='request'>
-      <div className='requestInputContainer'>
+    <div className='whiteContainer'>
+      <h3>Request a show</h3>
+      <div className='requestForm'>
         <input type="text" required placeholder="Type the title you're missing" value={title} onChange={e => setTitle(e.target.value)} />
         <input type="text" placeholder="Adding comment is optional, but may help." value={comment} onChange={e => setComment(e.target.value)} />
       </div>
 
-      <button onClick={() => createRequest()}>Send in my request</button>
+      <button className='reqButton' onClick={() => createRequest()}>Send in my request</button>
+
       {message && <p>{message}</p>}
     </div>
   )

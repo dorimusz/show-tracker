@@ -1,0 +1,26 @@
+.requestForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.requestForm input {
+    background-color: #fff;
+    padding: 5px;
+    color: #843345;
+    border: #843345 1px solid;
+    width: 50%;
+    border-radius: 0.2em;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.reqButton {
+    background-color: #843345;
+    margin-top: 15px;
+}
+
+.reqButton:hover {
+    box-shadow: none;
+    text-transform: none;
+}

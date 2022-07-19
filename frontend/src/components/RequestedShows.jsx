@@ -18,12 +18,19 @@ const RequestedShows = () => {
 
 
     return (
-        <div>
-            {requests.map((request, i) => <div className='container'>
-                {request.title}
-                {request.comment}
-                {request.status}
-            </div>)}
+        <div className='whiteContainer'>
+            <table className='epTable'>
+                <tr>
+                    <th>Requested title</th>
+                    <th>Comment</th>
+                    <th>Status</th>
+                </tr>
+                {requests.map((request, i) => <tr className='episode'>
+                    <td>{request.title}</td>
+                    <td>{request.comment}</td>
+                    <td>{request.status}</td>
+                </tr>)}
+            </table>
         </div>
     )
 }
