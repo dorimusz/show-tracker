@@ -37,15 +37,12 @@ const CompleteShowModify = () => {
     const { token } = useAuth()
     const { get } = toDoApi();
     const showid = window.location.href.split("/")[5];
-    console.log("selected shows' id FE: " + showid);
-
 
     const [show, setShow] = useState([]);
 
     const getShow = async () => {
         const response = await get(`/watchlist/show/${showid}`)
         setShow(response.data)
-        console.log(response.data.image);
     }
     useEffect(() => {
         getShow()

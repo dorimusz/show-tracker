@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { toDoApi } from '../api/toDoApi';
 import { useAuth } from "../providers/auth";
+import '../styles/Manage.css'
 
 const IgnoreShow = ({ show }) => {
     const { patch } = toDoApi();
@@ -19,7 +20,7 @@ const IgnoreShow = ({ show }) => {
 
     return (
         <>
-            {!show.isIgnored ? <button onClick={ignoreShow}>Ignore on my watchlist</button> : <button onClick={unignoreShow}>Show on watchlist</button>}
+            {!show.isIgnored ? <button className='ignoreButton' onClick={ignoreShow}>Ignore on my watchlist</button> : <button className='unignoreButton' onClick={unignoreShow}>Show on watchlist</button>}
         </>
     )
 }
@@ -35,7 +36,7 @@ const DeleteShow = ({ show }) => {
 
     return (
         <>
-            {!show.isDeleted ? <button onClick={deleteShow}>Delete from my watchlist</button> : null}
+            {!show.isDeleted ? <button className='deleteButton' onClick={deleteShow}>Delete from my watchlist</button> : null}
         </>
     )
 
@@ -60,32 +61,25 @@ const ManageShows = () => {
     return (
         <div className='pageContainer'>
             <h2>Manage My Shows</h2>
-            <div>
-                {token
-                    ?
-                    <div>
-                        <div className='watchlistContainer'>
-                            {watchlist ? watchlist.map((show, i) =>
+            {token
+                ?
+                <div className='whiteContainer'>
+                    {watchlist ? watchlist.map((show, i) =>
 
-                                <div key={i}>
-                                    {show.isDeleted ? null :
-                                        <div>
-                                            <p>{show.name}</p>
-                                            <IgnoreShow show={show} key={show.name} />
-                                            <DeleteShow show={show} key={show.name + show.id} />
-                                        </div>
-                                    }
-
-
-
+                        <div key={i} className="tricky">
+                            {show.isDeleted ? null :
+                                <div className='manageShow'>
+                                    <h4>{show.name}</h4>
+                                    <IgnoreShow show={show} key={show.name} />
+                                    <DeleteShow show={show} key={show.name + show.id} />
                                 </div>
-
-                            )
-                                : "No shows and eps to show"}
+                            }
                         </div>
-                    </div>
-                    : "Please log in!"}
-            </div>
+
+                    )
+                        : "No shows and eps to show"}
+                </div>
+                : "Please log in!"}
         </div>
     )
 }

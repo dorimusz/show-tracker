@@ -1,0 +1,31 @@
+.tricky {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.manageShow {
+    text-align: center;
+}
+
+.ignoreButton {
+    background-color: #F9F0F2;
+    color: #843345
+}
+
+.unignoreButton {
+    background-color: #843345;
+    color: #F9F0F2
+}
+
+.deleteButton {
+    background-color: #959da5;
+    color: #F9F0F2;
+    margin: 10px;
+}
+
+.manageShow button:hover {
+    box-shadow: none;
+    text-transform: none;
+}
