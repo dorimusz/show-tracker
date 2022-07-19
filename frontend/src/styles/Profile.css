@@ -1,0 +1,16 @@
+.h2username {
+    font-family: 'Edu TAS Beginner', cursive;
+    font-size: 1.4em;
+    text-shadow: 3px 2px 7px #843345;
+}
+
+.pUsername {
+    /* font-family: 'Edu TAS Beginner', cursive; */
+    font-size: 1em;
+    text-decoration: double;
+    font-weight: 600;
+}
+
+.greyText {
+    color: #959da5;
+}
