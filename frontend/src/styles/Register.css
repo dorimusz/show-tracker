@@ -1,0 +1,13 @@
+.registerForm {
+    align-items: center;
+    text-align: center;
+}
+
+.regbuttons {
+    width: 500px;
+}
+
+.regbuttons button {
+    margin-bottom: 15px;
+    ;
+}

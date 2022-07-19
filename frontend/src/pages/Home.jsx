@@ -1,5 +1,6 @@
 import React from "react";
-import { useAuth } from "../providers/auth" //így fogjuk tudni elérni az authot és a token a providerből
+import { useAuth } from "../providers/auth";
+import '../styles/Home.css'
 
 const Home = () => {
     const { auth, token } = useAuth();
