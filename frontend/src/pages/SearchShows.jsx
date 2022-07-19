@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import http from 'axios'
 import SearchShow from '../components/SearchShow';
-import '../styles/showcard.css'
 import '../styles/Search.css'
 
 const SearchShows = () => {

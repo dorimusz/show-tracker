@@ -25,7 +25,7 @@ const AddToWatchlist = (props) => {
 
     return (
         <>
-            {token ? <button onClick={addToWatchlist}>Add to watchlist</button> : <p>Want to track show? Log in!</p>}
+            {token ? <button className='addWatchlist' onClick={addToWatchlist}>Add to watchlist</button> : <p>Want to track show? Log in!</p>}
         </>
 
     )

@@ -3,6 +3,7 @@ import http from 'axios'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import AddToWatchlist from '../components/AddToWatchlist'
 import Episode from '../components/Episode'
+import '../styles/Shows.css'
 
 const CompleteShow = () => {
     const showid = window.location.href.split("/")[4];
@@ -31,30 +32,38 @@ const CompleteShow = () => {
 
     return (
         <div className='pageContainer'>
-            <div className='showDetails'>
-                <h2>{show.name}</h2>
-                <div>
-                    <img src={image} alt="kep" />
+            <h2>{show.name}</h2>
+            <div className='whiteContainer'>
+                <div className='showBox'>
+                    <div className='showImg'>
+                        <img src={image} alt="kep" />
+                    </div>
+
+                    <div className='showDetails'>
+                        {show ? <p><span>Status: </span>{show.status}</p> : <p><span>Status: </span>unknown</p>}
+                        {show.network ? <p><span>Network: </span>{show.network.name}</p> : <p>Network: unknown</p>}
+                        {show.genres ? <p><span>Genres: </span>{show.genres.toString().split(',').join(', ')}</p> : <p>Genres: unknown</p>}
+                        {show.runtime ? <p><span>Runtime in minutes: </span>{show.runtime}</p> : <p>Runtime in: no info</p>}
+                        {show.rating?.average ? <p><span>Rating: </span>{show.rating.average}</p> : <p><span>Rating: </span>no info</p>}
+
+                        <div className='buttonHolder'>
+                            {onWatchlist ? <p>Added to your watchlist. To manage your series go to Watchlist page.</p> : <AddToWatchlist showid={showid} show={show} episodes={episodes} setOnWatchlist={setOnWatchlist} />}
+                        </div>
+                    </div>
                 </div>
-
-                <div className='showInfos'>
-                    {show ? <p>Status: {show.status}</p> : <p>Status: unknown</p>}
-                    {show.network ? <p>Network: {show.network.name}</p> : <p>Network: unknown</p>}
-                    {show.genres ? <p>Genres: {show.genres.toString().split(',').join(', ')}</p> : <p>Genres: unknown</p>}
-                    {show.runtime ? <p>Runtime: {show.runtime}</p> : <p>Runtime: no info</p>}
-                    {show.rating?.average ? <p>Rating: {show.rating.average}</p> : <p>Rating: no info</p>}
-
-                </div>
-                {onWatchlist ? <p>Added to your watchlist. To manage your series go to Watchlilst page.</p> : <AddToWatchlist showid={showid} show={show} episodes={episodes} setOnWatchlist={setOnWatchlist} />}
-                {/* <AddToWatchlist showid={showid} show={show} episodes={episodes} /> */}
-
-
             </div>
 
-            <div>
-                {episodes ? episodes.map((episode, i) => <Episode episode={episode} key={i} />) : "Series are loading"}
+            <div className='whiteContainer'>
+                <table className='epTable'>
+                    <tr>
+                        <th>Season x Episode</th>
+                        <th>Title</th>
+                        <th>Airdate</th>
+                        <th></th>
+                    </tr>
+                    {episodes ? episodes.map((episode, i) => <Episode episode={episode} key={i} />) : "Series are loading"}
+                </table>
             </div>
-            {/* <EpisodeList showid={showid} /> */}
 
             <div className='episodesContainer'>
 

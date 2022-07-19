@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useAuth } from "../providers/auth";
 import { toDoApi } from '../api/toDoApi';
+import '../styles/Shows.css'
 
 const Eps = ({ ep, showid }) => {
     const watchEpisode = async () => {
@@ -19,13 +20,15 @@ const Eps = ({ ep, showid }) => {
 
     return (
         <>
-            <div className='episodeLine'>
-                {ep.airdate}
-                {ep.name}
-                {ep.season}
-                {ep.epNumber}
-            </div>
-            {ep.watched ? <button onClick={unWatchEpisode}>Unwatch</button> : <button onClick={watchEpisode}>Add to watched</button>}
+            <tr className='episode'>
+                <td>{ep.airdate}</td>
+                <td>{ep.season + ' x ' + ep.epNumber}</td>
+                <td className='epname'>{ep.name}</td>
+                <td>
+                    {ep.watched ? <button onClick={unWatchEpisode}>Unwatch</button> : <button onClick={watchEpisode}>Add to watched</button>}
+
+                </td>
+            </tr>
         </>
     )
 }
@@ -36,12 +39,13 @@ const CompleteShowModify = () => {
     const showid = window.location.href.split("/")[5];
     console.log("selected shows' id FE: " + showid);
 
+
     const [show, setShow] = useState([]);
 
     const getShow = async () => {
         const response = await get(`/watchlist/show/${showid}`)
         setShow(response.data)
-        console.log(response.data.name);
+        console.log(response.data.image);
     }
     useEffect(() => {
         getShow()
@@ -53,22 +57,34 @@ const CompleteShowModify = () => {
             <div>
                 {token
                     ?
-                    <div>
-                        <h3>Season info</h3>
-                        {show.name}
+                    <div className='whiteContainer'>
+                        <div className='showBox'>
+                            <div className='showImg'>
+                                {show?.image ? <img src={show.image} alt="kep" /> : <img src='https://via.placeholder.com/210x295/ffffff/c0c0c0?text=No+image' alt={show.name} />}
+                            </div>
 
-                        <div className='showImage'>
-                            {show?.image?.medium ? <img src={show.image.medium} alt="kep" /> : <img src='https://via.placeholder.com/210x295/ffffff/c0c0c0?text=No+image' alt={show.name} />}
-                        </div>
-                        <div className='showInfo'>
-                            <p>Category: {show?.genres?.toString().split(',').join(', ')}</p>
-                            <p>Episode length: {show.runtime}</p>
-                            <p>Status: {show.status}</p>
-                            {/* <p>Summary: {show.summary}</p> */}
+                            <div className='showDetails'>
+                                <h4>{show.name}</h4>
+                                <p><span>Category: </span>{show?.genres?.toString().split(',').join(', ')}</p>
+                                <p><span>Episode length in min: </span>{show.runtime}</p>
+                                <p><span>Status: </span>{show.status}</p>
+                                {/* <p>Summary: {show.summary}</p> */}
+                            </div>
                         </div>
 
-                        <h3>Episodes</h3>
-                        {show?.seasons?.map((ep, i) => <Eps ep={ep} key={i} showid={showid} />)}
+                        <div>
+                            <h3>Episodes</h3>
+                            <table className='epTable'>
+                                <tr>
+                                    <th>Airdate</th>
+                                    <th>Season x Episode</th>
+                                    <th>Title</th>
+                                    <th></th>
+                                </tr>
+                                {show?.seasons?.map((ep, i) => <Eps ep={ep} key={i} showid={showid} />)}
+                            </table>
+
+                        </div>
 
                     </div>
                     :

@@ -1,0 +1,67 @@
+.showBox {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.showDetails {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    padding-bottom: 15px;
+    margin-left: 20px;
+}
+
+.showDetails p span {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.addWatchlist {
+    font-size: 0.8em;
+}
+
+.epTable {
+    margin: 0 5px;
+    width: 100%;
+    border-spacing: 10px;
+    border-collapse: collapse;
+}
+
+th {
+    color: #843345;
+}
+
+td,
+th {
+    text-align: left;
+    padding: 5px;
+}
+
+td {
+    height: fit-content;
+}
+
+tr {
+    position: relative;
+}
+
+tr:nth-child(even) {
+    background-color: #F9F0F2;
+    border-radius: .4em;
+}
+
+tr button {
+    background-color: #843345;
+    font-size: .7em;
+
+    padding: 5px;
+}
+
+tr button:hover {
+    background-color: #BA4F66;
+    box-shadow: none;
+    margin: none;
+    padding: 5px;
+    font-weight: 800;
+    text-transform: none;
+}

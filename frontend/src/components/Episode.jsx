@@ -2,12 +2,11 @@ import React from 'react'
 
 const Episode = (episode) => {
     return (
-        <div className='episode'>
-            <p>{episode.episode.airdate}</p>
-            <p>{episode.episode.name}</p>
-            <p>{episode.episode.season}</p>
-            <p>{episode.episode.number}</p>
-        </div>
+        <tr className='episode'>
+            <td>{episode.episode.season + ' x ' + episode.episode.number} </td>
+            <td>{episode.episode.name}</td>
+            <td>{episode.episode.airdate}</td>
+        </tr>
     )
 }
 
