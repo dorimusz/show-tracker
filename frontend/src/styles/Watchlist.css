@@ -1,0 +1,41 @@
+.watchlist {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 40px;
+    justify-content: center;
+}
+
+.watchCard {
+    max-width: 35%;
+    flex-flow: column wrap;
+    border-radius: 1.2em;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    text-align: center;
+}
+
+img.watchlistImg {
+    max-width: 80%;
+    border-radius: 0.4em;
+}
+
+.buttonHolder {
+    margin: 10px 0 20px
+}
+
+.buttonHolder button {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin: 0 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    background-color: #BA4F66;
+    width: 85%;
+}
+
+.buttonHolder button:hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin: 0 10px;
+    text-transform: uppercase;
+    font-weight: 800;
+    background-color: #843345;
+}
