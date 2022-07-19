@@ -13,20 +13,21 @@ const SearchShow = ({ searchedShow }) => {
     }
 
     return (
-        <div className='showCard'>
-            <div className='showImage'>
-                {searchedShow.show?.image?.medium ? <img src={searchedShow.show.image.medium} alt="kep" /> : <img src='https://via.placeholder.com/210x295/ffffff/c0c0c0?text=No+image' alt={searchedShow.show.name} />}
-            </div>
-            <div className='showInfos'>
-                <h3>{searchedShow.show.name}</h3>
-                <p>Status: {searchedShow.show.status}</p>
-                <p>Premiered: {searchedShow.show.premiered ? searchedShow.show.premiered : "missing information"}</p>
-                <p>Genres: {genres}</p>
+        <div className='watchCard searchCard'>
+            <div className='imgHolder'>
+                {searchedShow.show?.image?.medium ? <img src={searchedShow.show.image.medium} alt="kep" className='watchlistImg searchImg' /> : <img src='https://via.placeholder.com/210x236/ffffff/c0c0c0?text=No+image' alt={searchedShow.show.name} />}
             </div>
 
             <div className='buttonHolder'>
-                <button onClick={showDetails}>More details</button>
+                <button className='showButton' onClick={showDetails}>Show more</button>
             </div>
+            <div className='showInfos'>
+                <h3 className='searchH3'>{searchedShow.show.name}</h3>
+                <p>{searchedShow.show.status}</p>
+                <p>Premiered: {searchedShow.show.premiered ? searchedShow.show.premiered : "missing information"}</p>
+                <p>{genres}</p>
+            </div>
+
         </div>
     )
 }

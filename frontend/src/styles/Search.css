@@ -1,0 +1,57 @@
+.searchbar {
+    background-color: #BA4F66;
+    padding: 10px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0.7em;
+    margin: 40px 40px 20px 20px;
+}
+
+.searchbar input {
+    background-color: #fff;
+    padding: 5px;
+    color: #843345;
+    width: 85%;
+    border-radius: 0.2em;
+    font-size: 1em;
+}
+
+.searchButton {
+    width: 13%;
+    background-color: #E8C4CC;
+}
+
+.searchButton:hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    color: #843345;
+}
+
+div.watchCard.searchCard {
+    max-width: 40%;
+    align-items: center;
+    position: relative;
+}
+
+.imgHolder {
+    padding-top: 20px;
+}
+
+.showInfos {
+    font-size: .75em;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.searchH3 {
+    max-width: 200px;
+}
+
+
+.showButton {
+    padding: 5px;
+    font-size: 0.9em;
+    background-color: #BA4F66;
+}

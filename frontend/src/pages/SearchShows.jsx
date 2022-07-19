@@ -26,8 +26,9 @@ const SearchShows = () => {
     return (
         <div className='pageContainer'>
             <h2>Search shows</h2>
-            <p className="textP">Start typing a keyword a movie title into the field. In case you don't have any idea, just pick one from the most popular ones:</p>
-            <form className="searchbar">
+            <p className="infos">Start typing a keyword a movie title into the field. In case you don't have any idea, just pick one from the most popular ones:</p>
+
+            <div className="searchbar">
                 <input
 
                     id="searchSeries"
@@ -37,18 +38,18 @@ const SearchShows = () => {
                 />
 
                 <button
-                    className="searchButtons"
+                    className="searchButton"
                     onClick={(e) => startSearch(e)}
                 >
                     Search
                 </button>
-            </form>
+            </div>
 
-            <div className='container'>
-                <div className='showContainer'>
+
+            <div className='whiteContainer'>
+                <div className="watchlist">
                     {shows ? shows.map((show, i) => <SearchShow searchedShow={show} key={i} />) : "Series are loading"}
                 </div>
-
             </div>
 
         </div>
