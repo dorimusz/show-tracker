@@ -56,6 +56,7 @@ const AuthProvider = ({ children }) => {
     const logout = () => {
         setToken(null);
         localStorage.removeItem("token");
+        this.router.navigate(['/'])
     };
 
     const register = async (username) => {
