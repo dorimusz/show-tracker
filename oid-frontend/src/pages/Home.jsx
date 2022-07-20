@@ -50,15 +50,15 @@ const Home = () => {
     }, [])
 
     return (
-        <div>
-            <h1 style={{ marginTop: "55px" }}>Home</h1>
+        <div className="whiteContainer">
+            <h1 style={{ marginTop: "55px" }}>Log on or register</h1>
             {
                 error && <div>{error}</div>
             }
             {
-                !error && (<div>
+                !error && (<div className="requestForm registerForm">
                     <input placeholder="Username" type="text" onChange={(e) => setUsername(e.target.value)} value={username} />
-                    <input placeholder="Password" type="text" onChange={(e) => setPassword(e.target.value)} value={password} />
+                    <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} value={password} />
 
                     <button onClick={login}>Login</button>
                     <button onClick={signup}>Signup</button>
