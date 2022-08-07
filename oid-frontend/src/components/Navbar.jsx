@@ -4,7 +4,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className='navbar' style={{ backgroundColor: "gray", position: "absolute", top: "0", width: "100%", display: "flex", justifyContent: "space-between" }}>
+            <nav className='navbar'>
 
                 <p>
                     My openID provider
