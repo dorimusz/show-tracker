@@ -1,0 +1,55 @@
+.homeContainer {
+    margin: 80px 20px 0;
+
+}
+
+.uList {
+    padding: 5px 10px
+}
+
+li {
+    padding: 10px 0 2px 20px;
+    font-size: 1.1em;
+    list-style: circle;
+}
+
+.simpleText,
+.simpleTextCenter {
+    font-size: 1.2em;
+    color: #843345;
+    font-weight: 400;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.simpleTextCenter {
+    text-align: center;
+}
+
+
+.redContainer {
+    background-color: #843345;
+    min-height: 100px;
+    align-items: center;
+    position: relative;
+}
+
+.redContainer a {
+    color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.redContainer a:hover {
+    padding: 7px;
+    color: #fff;
+    box-shadow: #fff 0px 7px 29px 0px;
+    font-size: 1.2rem;
+    border-radius: 1em;
+    background-color: #fff;
+    color: #843345;
+}

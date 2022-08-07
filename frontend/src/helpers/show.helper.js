@@ -5,7 +5,7 @@ const prepareShowBody = (showid, show, episodes) => {
         genres: show.genres,
         status: show.status,
         runtime: show.runtime,
-        network: show.network.name,
+        network: show.network,
         image: show.image.medium,
         rating: show.rating.average,
         seasons: episodes.map(episode => mapEpisode(episode))
